@@ -3,7 +3,7 @@ module.exports = function(){
     var router = express.Router();  
 
     function getFlower(res, mysql, context, complete){
-        mysql.pool.query("SELECT flower_name, image,color FROM Flowers", function(error, results, fields){
+        mysql.pool.query("SELECT name,color FROM Flowers", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -14,7 +14,7 @@ module.exports = function(){
     }
 
     function getFruits(res, mysql, context, complete){
-        mysql.pool.query("SELECT fruit_name, image,price FROM Fruit", function(error, results, fields){
+        mysql.pool.query("SELECT name, price FROM Fruit", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();

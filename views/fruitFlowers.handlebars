@@ -1,41 +1,44 @@
-  
-  <body>
+    <body>
 
-    <div class=fruittitle>
-      <h2>FRUIT</h2>
+    <div class=Fruittitle>
+      <h2>FLOWERS:</h2>
       <div class="box">
         <ul>
-          <li class="fruit">Fruit 1 name
-            <ul>
-              <li class="price">Price: _____</li>
-            </ul>
-          </li>
-          <li class="fruit">Fruit 2 name
-            <ul>
-              <li class="price">Price: _____</li>
-            </ul>
-          </li>
-        </ul>
-
+        <table>
+    <thead> 
+        <th>Fruit</th> 
+        <th>Price</th> 
+    </thead> 
+    <tbody>
+        {{#each fruit}} 
+        <tr> 
+            <td>{{fruit_name}}</td>
+            <td>{{price}}</td>  
+        </tr> 
+        {{/each}} 
+    </tbody> 
+    </table> 
       </div>
-    </div>
+
 
     <div class=Flowertitle>
       <h2>FLOWERS:</h2>
       <div class="box">
         <ul>
-          <li class="flower">Flower 1 name
-            <ul>
-              <li class="color">Color: _____</li>
-            </ul>
-          </li>
-          <li class="flower">Flower 2 name
-            <ul>
-              <li class="color">Color: _____</li>
-            </ul>
-          </li>
-        </ul>
-
+        <table>
+    <thead> 
+        <th>Flowers</th>  
+        <th>Color</th> 
+    </thead> 
+    <tbody>
+        {{#each flower}} 
+        <tr> 
+            <td>{{flower_name}}</td>
+            <td>{{color}}</td>  
+        </tr> 
+        {{/each}} 
+    </tbody> 
+    </table> 
       </div>
     </div>
 
