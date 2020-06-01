@@ -1,16 +1,27 @@
+        
         <form id="addFruit" action="/island" method="post">
-        Fruit Name: <input type="text" name="fruit_name"><br>
-        Native: <input type="text" name="native"><br>
+        Fruit Name: <input type="text" name="ffruit_name"><br>
+        Native: <input type="text" name="fnative"><br>
         <input type="submit" value="Submit">
         </form>
         <br/>
 
         <form id="addflower" action="/island" method="post">
-        Flower Name: <input type="text" name="flower_name"><br>
-        Flower Color: <input type="text" name="flower_color"><br>
+        Flower Name: <input type="text" name="fflower_name"><br>
+        Flower Color: <input type="text" name="fflower_color"><br>
         <input type="submit" value="Submit">
         </form>
         <br/>
+
+        <h3> Add Favorite Villager </h3>
+        <form id="add_favorite" action="/island" method="post">
+        Villager: <select name='fvillager'>
+        {{#each villager}}
+        <option value='{{villager}}'>{{name}}</option>
+        {{/each}}
+        </select>
+        <br>
+        <input type="submit" value="Submit">
 
      <div class ="player_info">
        <h1>{{island_name}}</h1>
@@ -31,10 +42,11 @@
             <tbody>
         {{#each villager}} 
         <tr> 
-            <td>{{fruit_name}}</td>
+            <td>{{villager_name}}</td>
             <td><img src="{{image}}" alt="{{name}} picture"></td> 
-            <td>{{personality}}</td>
-            <td>{{animal}}</td>
+            <td>{{join_date}}</td>
+            <td>{{rating}}</td>
+            <td>{{favorite}}</td>>
         </tr> 
         {{/each}} 
 
@@ -91,10 +103,3 @@
             <button id = "add_flower" onclick="addFlower()"> ADD </button> 
                  <div class="addvill_form">
               <h1>Add Fruit or Flower</h1>
-
-</body>
-<footer>
-	<div>
-		<p> </p>
-	</div>
-</footer>
