@@ -1,41 +1,43 @@
   
   <body>
 
-    <div class=fruittitle>
-      <h2>FRUIT</h2>
-      <div class="box">
-        <ul>
-          <li class="fruit">Fruit 1 name
-            <ul>
-              <li class="price">Price: _____</li>
-            </ul>
-          </li>
-          <li class="fruit">Fruit 2 name
-            <ul>
-              <li class="price">Price: _____</li>
-            </ul>
-          </li>
-        </ul>
+        <form id="addFlowers" action="/fruitFlowers" method="post">
+        Fruit Name: <input type="text" name="ffruit_name"><br>
+        Price: <input type="text" name="fprice"><br>
+        <input type="submit" value="Submit">
+        </form>
+        <br/>
 
+        <form id="addFruits" action="/fruitFlowers" method="post">
+        Flower Name: <input type="text" name="fflower_name"><br>
+        Flower Color: <input type="text" name="fflower_color"><br>
+        <input type="submit" value="Submit">
+        </form>
+        <br/>
+
+    <div class=Fruittitle>
+      <h2>Fruit:</h2>
+      <div class="box">
+              <table>
+    <thead> 
+        <th>Fruit</th> 
+        <th>Price</th> 
+     </thead> 
+     {{> fruitcard}}
+       </table> 
       </div>
-    </div>
+
 
     <div class=Flowertitle>
       <h2>FLOWERS:</h2>
       <div class="box">
-        <ul>
-          <li class="flower">Flower 1 name
-            <ul>
-              <li class="color">Color: _____</li>
-            </ul>
-          </li>
-          <li class="flower">Flower 2 name
-            <ul>
-              <li class="color">Color: _____</li>
-            </ul>
-          </li>
-        </ul>
-
+      <table>
+    <thead> 
+        <th>Flowers</th>  
+        <th>Color</th> 
+    </thead> 
+      {{> flowercard}}
+      </table>
       </div>
     </div>
 

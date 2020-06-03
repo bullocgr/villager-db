@@ -1,18 +1,19 @@
     
+        <form id="addVillagers" action="/island" method="post">
+        Link an Image!: <input type="text" name="fimage"><br>
+        Villager Name: <input type="text" name="fname"><br>
+        Villager Personality: <input type="text" name="fpersonality"><br>
+        Villager Animal: <input type="text" name="fanimal"><br>
+        <input type="submit" value="Submit">
+        </form>
+        <br/>
+
 
         <div class="content">
             <div class="Villager-Header">
                 <h1>Villagers</h1>
             </div>
-            {{#each villager}}
-            <div class="Villager-card">
-                <img id="villager-image" src={{image}} alt="Villager-picture" style="width:100%">
-                <ul id="villager-text">
-                    <li>Name:{{name}}</li>
-                    <li>Personality: {{personality}}</li>
-                    <li>Species: {{animal}}</li>
-                </ul>
-                <div style="clear:both"></div>
-            </div> 
-            {{/each}}
+                {{> villagercard}}
+
+
             

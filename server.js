@@ -22,6 +22,7 @@ app.get('/island', function(req, res) {
 
 app.get('/fruitFlowers', function(req, res) {
     res.render('fruitFlowers')
+ 
 });
 
 app.get('/homepage', function(req, res) {
