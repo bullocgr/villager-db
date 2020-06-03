@@ -1,0 +1,310 @@
+/*************************Login page css here******************************/
+input[type=user], input[type=password] {
+    width: 75%;
+    padding: 12px 40px;
+    margin: 8px;
+    display: inline-block;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: left;
+    }
+    .box{
+    background-color:#D3D3D3;
+    padding-top: 150px;
+    width: 500px;
+    height: 400px;      
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    margin-top: -200px;
+    margin-left: -250px;
+    text-align: center;
+    border: 3px solid black;
+    overflow: auto;
+    position: absolute;
+    }
+    
+    #login_header{
+    background-color: #D3D3D3; 
+    top: 60%;
+    left: 50%;
+    font-size: 26px;
+    width: 300px;
+    height: 130px;
+    margin-top: -380px;
+    margin-left: -147px;
+    position: absolute;
+    text-align: center;
+    border: 3px solid black;
+    overflow: auto;
+    position: absolute;
+    }
+  
+    button[type=enter] {
+    background-color: #D3D3D3;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    }
+  
+  
+  /*************************Account page css here******************************/
+  
+    /*styles nav bar*/
+  .topnav {
+  background-color: rgb(143, 109, 51);
+  overflow: hidden;
+  float: none;
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+    
+    /* Styles the links inside the nav bar */
+    .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center; 
+    padding: 14px 46px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+    
+    /* This changes color when hovering over links */
+    .topnav a:hover {
+    background-color: rgb(211, 168, 25);
+    color: black;
+    }
+  
+  /* Include the padding and border in an element's total width and height */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Remove margins and padding from the list */
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the list items */
+  ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+  
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Set all odd list items to a different color to switch it up */
+  ul li:nth-child(odd) {
+    background: #f9f9f9;
+  }
+  
+  /* Darker background-color on hover */
+  ul li:hover {
+    background: #ddd;
+  }
+  
+  /* When clicked on, add a background color */
+  ul li.checked {
+    background: #888;
+    color: #fff;
+  }
+  
+  /* Style the close button */
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+  }
+  /* Styles the 'x' button */
+  .close:hover {
+    background-color: #87878b;
+    color: white;
+  }
+  
+  /* Style the header */
+  .header {
+    background-color: #96f5f5;
+    padding: 30px 40px 50px;
+    color: white;
+    text-align: center;
+    margin: 57px 2px 0px 2px;
+  }
+  
+  /* Clear floats after the header */
+  .header:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the input */
+  inputBar {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+  }
+  
+  /* Style the add button */
+  .addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+  }
+  
+  .addBtn:hover {
+    background-color: #bbb;
+  }
+  
+  
+  /*************************Homapage page css here******************************/
+  
+  .column1 {
+  text-align: center;
+  width: 30%;
+  padding: 50px;
+  background-color: #FFFFFF;
+  margin-top: 150px;
+  float: left;
+  margin-left:100px;
+  border: 3px solid black;
+  display: inline-block;
+  overflow: auto;
+  border-radius: 25px;
+  padding-bottom: 400px;
+  
+  }
+  
+  .column2 {
+  text-align: center;
+  width: 30%;
+  padding: 50px;
+  background-color: #FFFFFF;
+  margin-top: 150px;
+  float: right;
+  margin-right: 75px;
+  border: 3px solid black;
+  display: inline-block;
+  overflow: auto;
+  border-radius: 25px;
+  padding-bottom: 400px;
+  
+  }
+  
+  .row:after {
+  content: "";
+  display: table;
+  clear: both;
+  
+  }
+  
+  #acc_but {
+  text-align: right;
+  vertical-align: middle;
+  line-height: 30px;
+  margin: auto;
+  float: right;
+  border: 3px solid black;
+  font-size: 30px;
+  padding-right: 100px;
+  transition-duration: 0.4s;
+  display: inline-block;
+  
+  }
+  
+  #acc_but:hover {
+  background-color: #96f5f5; 
+  
+  }
+  
+  .Home_Header {
+  display: inline-block;
+  padding-left: 0px;
+  display: flex;
+  float: center;
+  justify-content: center;
+  align-items: center;
+  text-decoration: black;
+  font-size: 30px;
+  
+  }
+  
+  
+  /*************************Villagers page css here******************************/
+  .content {
+    margin-top: 50px;
+  } 
+  
+  .Villager-card {
+    height: 225px;
+    width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    text-align: center;
+    background-color: #f1f1f1;
+    margin: auto;
+    border: 3px;
+    padding: 10px;
+    background-color: #82ff96;
+  }
+  
+  .container {
+    padding: 2px 16px;
+  }
+  
+  #villager-text {
+    float: none;
+    display: inline-block;
+    line-height: 2em;
+    padding-top: 30px;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  body {
+    margin:50px 0; 
+    padding:0;
+    text-align:center;
+    background-color: #96f5f5;
+  }
+  
+  .Villager-Header {
+    padding-top: 50px;
+  } 
+  
+  img {
+    padding: 10px;
+    float: left;
+    max-width:900px;
+    max-height:525px;
+  } 
+  
+  /*************************Fruits and flowers page css here******************************/
+  
+  
