@@ -1,29 +1,10 @@
 <meta name="Island">
 <link rel="stylesheet" href="/css/island.css">
 
-        <form id="addFruit" action="/island" method="post">
-        Fruit Name: <input type="text" name="ffruit_name"><br>
-        Native: <input type="text" name="fnative"><br>
-        <input type="submit" value="Submit">
-        </form>
-        <br/>
+        
 
-        <form id="addflower" action="/island" method="post">
-        Flower Name: <input type="text" name="fflower_name"><br>
-        Flower Color: <input type="text" name="fflower_color"><br>
-        <input type="submit" value="Submit">
-        </form>
-        <br/>
-
-        <h3> Add Favorite Villager </h3>
-        <form id="add_favorite" action="/island" method="post">
-        Villager: <select name='fvillager'>
-        {{#each villager}}
-        <option value='{{villager}}'>{{name}}</option>
-        {{/each}}
-        </select>
-        <br>
-        <input type="submit" value="Submit">
+        
+        
 
      <div class ="player_info">
        <h1>{{island_name}}</h1>
@@ -47,6 +28,17 @@
     </tbody> 
     </table> 
 
+    <h3> Add Favorite Villager </h3>
+<div class="hiddenVillager">
+<form id="add_favorite" action="/island" method="post">
+        Villager: <select name='fvillager'>
+        {{#each villager}}
+        <option value='{{villager}}'>{{name}}</option>
+        {{/each}}
+        </select>
+        <br>
+        </div>
+        <button type="button">Sumbit</button>
         </div>
 
         </div>
@@ -77,6 +69,23 @@
 
         </div>
 
+<div class="hiddenFruit">
+    <form id="addFruit" action="/island" method="post">
+        Fruit Name: <input type="text" name="ffruit_name"><br>
+        Native: <input type="text" name="fnative"><br>
+        </div>
+        <button type="button">Submit</button>
+        </form>
+        <br/>
+
+        <div class="hiddenFlower">
+        <form id="addflower" action="/island" method="post">
+        Flower Name: <input type="text" name="fflower_name"><br>
+        Flower Color: <input type="text" name="fflower_color"><br>
+        </div>
+        <button type="button">Submit</button>
+        </form>
+        <br/>
         </div>
 
 

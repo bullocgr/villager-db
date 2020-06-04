@@ -1,14 +1,7 @@
 <meta name="Villagers">
 <link rel="stylesheet" href="/css/villagers.css">
 
-        <form id="addVillagers" action="/island" method="post">
-        Link an Image!: <input type="text" name="fimage"><br>
-        Villager Name: <input type="text" name="fname"><br>
-        Villager Personality: <input type="text" name="fpersonality"><br>
-        Villager Animal: <input type="text" name="fanimal"><br>
-        <input type="submit" value="Submit">
-        </form>
-        <br/>
+
 
 
         <div class="content">
@@ -16,6 +9,17 @@
                 <h1>Villagers</h1>
             </div>
                 {{> villagercard}}
+
+    <div class="hidden">
+        <form id="addVillagers" method="post">
+        Link an Image!: <input type="text" name="fimage"><br>
+        Villager Name: <input type="text" name="fname"><br>
+        Villager Personality: <input type="text" name="fpersonality"><br>
+        Villager Animal: <input type="text" name="fanimal"><br>
+    </div>
+        <button type = "button">Submit</button>
+        </form>
+        <br/>
 
 
             

@@ -59,3 +59,12 @@ body {
 
 
 }
+
+
+.hiddenFruits {
+  display: none;
+}
+
+.hiddenFLowers {
+  display: none;
+}

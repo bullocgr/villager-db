@@ -3,19 +3,7 @@
 
   <body>
 
-        <form id="addFlowers" action="/fruitFlowers" method="post">
-        Fruit Name: <input type="text" name="ffruit_name"><br>
-        Price: <input type="text" name="fprice"><br>
-        <input type="submit" value="Submit">
-        </form>
-        <br/>
-
-        <form id="addFruits" action="/fruitFlowers" method="post">
-        Flower Name: <input type="text" name="fflower_name"><br>
-        Flower Color: <input type="text" name="fflower_color"><br>
-        <input type="submit" value="Submit">
-        </form>
-        <br/>
+        
 
     <div class=Fruittitle>
       <h2>Fruit:</h2>
@@ -26,8 +14,16 @@
         <th>Price</th> 
      </thead> 
      {{> fruitcard}}
-       </table> 
+       </table>
       </div>
+      <div class ="hiddenFlowers">
+    <form id="addFlowers" action="/fruitFlowers" method="post">
+        Fruit Name: <input type="text" name="ffruit_name"><br>
+        Price: <input type="text" name="fprice"><br>
+    </div>
+        <button type ="button">Submit</button>
+        </form>
+        <br/> 
 
 
     <div class=Flowertitle>
@@ -41,6 +37,18 @@
       {{> flowercard}}
       </table>
       </div>
+          <div class ="hiddenFruits">
+        <form id="addFruits" action="/fruitFlowers" method="post">
+        Flower Name: <input type="text" name="fflower_name"><br>
+        Flower Color: <input type="text" name="fflower_color"><br>
+      </div>
+        <button type="button">Submit</button>
+        </form>
+        <br/>
     </div>
+
+
+
+
 
   </body>
