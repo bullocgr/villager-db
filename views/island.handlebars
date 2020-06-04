@@ -1,0 +1,88 @@
+        
+        <form id="addFruit" action="/island" method="post">
+        Fruit Name: <input type="text" name="ffruit_name"><br>
+        Native: <input type="text" name="fnative"><br>
+        <input type="submit" value="Submit">
+        </form>
+        <br/>
+
+        <form id="addflower" action="/island" method="post">
+        Flower Name: <input type="text" name="fflower_name"><br>
+        Flower Color: <input type="text" name="fflower_color"><br>
+        <input type="submit" value="Submit">
+        </form>
+        <br/>
+
+        <h3> Add Favorite Villager </h3>
+        <form id="add_favorite" action="/island" method="post">
+        Villager: <select name='fvillager'>
+        {{#each villager}}
+        <option value='{{villager}}'>{{name}}</option>
+        {{/each}}
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+
+     <div class ="player_info">
+       <h1>{{island_name}}</h1>
+        <h2>est. {{start_date}}</h2>
+     </div>
+
+
+     <div class = "boxes">
+     <div class = "subbox1">
+        <div class = "Villager_List">
+            <p>Villager List</p>
+            <thead> 
+        <th>Villagers</th> 
+        <th>Image</th>
+        <th>Personality</th> 
+        <th>Animal</th>
+            </thead> 
+            <tbody>
+        {{> islandvill}}
+
+    </tbody> 
+    </table> 
+
+        </div>
+
+        </div>
+         <div class = "subbox2">
+            <div class = "Fruit_Flowers">
+            <p>Fruit & Flowers</p>
+
+        <thead> 
+        <th>Fruit</th> 
+        <th>Native</th> 
+    </thead> 
+    <tbody>
+
+    </tbody> 
+   
+
+    <thead> 
+        <th>Flowers</th>  
+        <th>Color</th> 
+    </thead> 
+        {{> islandflowers}}
+
+        <thead> 
+        <th>Fruits</th>  
+        <th>Native</th> 
+    </thead> 
+        {{> islandfruits}}
+
+        </div>
+
+        </div>
+
+
+     </div>
+            <div class = "button_box">
+            <button id = "add_vill"> ADD </button>
+            <button id = "rmv_vill"> Remove </button>
+
+
+        <div class = "button_boxr">
+            <button id = "add_flower" onclick="addFlower()"> ADD </button> 
