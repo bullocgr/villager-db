@@ -75,6 +75,6 @@ img {
     max-height:225px;
 } 
 
-.hidden {
+#hidden {
   display: none;
 }
