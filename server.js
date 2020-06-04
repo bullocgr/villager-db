@@ -13,7 +13,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
 app.get('/', function(req, res) {
-    res.render('layouts/main')
+    res.render('homepage')
 });
 
 app.get('/island', function(req, res) {
