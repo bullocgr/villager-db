@@ -3,7 +3,8 @@ var app = express();
 
 var logger = require('./logger');
 
-app.use(express.static(path.join(__dirname, '/public')));
+/*app.use(express.static(path.join(__dirname, '/public')));*/
+app.use(express.static(__dirname + '/public'));
 
 app.use(logger);
 

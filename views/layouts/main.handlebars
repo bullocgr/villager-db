@@ -1,13 +1,19 @@
 <meta name="Home Page">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css" type='text/css'>
+
 
 <html>
      <head>
          <title>{{Title}}</title>
 
+      {{#each css}}
+<link rel="stylesheet" href="css/{{this}}" >
+ {{/each}}
+
      {{#each jsscripts}}
     <script src="/static/{{this}}"></script>
     {{/each}}
+
 
      </head>
 
@@ -15,12 +21,14 @@
 
             <div class="topnav">
                     <a href="/homepage">Home</a>
-                    <a href="#account">Account</a>
+                    <a href="/islandpage">Account</a>
                     <a href="#search">Search</a>
                     <a href="/login">Log out</a>
                 </div>
                             {{{body}}}
 
     </body>
+
+    </html>
 
     

@@ -196,7 +196,7 @@ input[type=user], input[type=password] {
   display: inline-block;
   overflow: auto;
   border-radius: 25px;
-  padding-bottom: 400px;
+  padding-bottom: 200px;
   
   }
   
@@ -212,7 +212,7 @@ input[type=user], input[type=password] {
   display: inline-block;
   overflow: auto;
   border-radius: 25px;
-  padding-bottom: 400px;
+  padding-bottom: 200px;
   
   }
   
@@ -306,5 +306,20 @@ input[type=user], input[type=password] {
   } 
   
   /*************************Fruits and flowers page css here******************************/
+  
+  .fruittitle {
+
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    width: 75%;
+  }
+  
+  .Flowertitle {
+  position: absolute;
+    top:400px;
+    left: 150px;
+    width: 75%;
+  }
   
   
