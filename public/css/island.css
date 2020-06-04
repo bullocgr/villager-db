@@ -87,3 +87,15 @@
 		background-color: #96f5f5;
 
 }
+
+.hiddenVillager {
+	display: none;
+}
+
+.hiddenFlower {
+	display: none;
+}
+
+.hiddenFruit {
+	display: none;
+}
