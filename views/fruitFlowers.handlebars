@@ -1,5 +1,7 @@
 <meta name="Fruits And Flowers">
 <link rel="stylesheet" href="/css/fruitFlowers.css">
+<script src="fruitsFlowers.js" charset="utf-8" defer></script>
+
 
   <body>
 
@@ -16,12 +18,13 @@
      {{> fruitcard}}
        </table>
       </div>
-      <div class ="hiddenFlowers">
-    <form id="addFlowers" action="/fruitFlowers" method="post">
-        Fruit Name: <input type="text" name="ffruit_name"><br>
-        Price: <input type="text" name="fprice"><br>
+      <div id ="hiddenFruits">
+    <form id="addFruits" method="post">
+        Fruit Name: <input type="text" name="ffruit_name" id="fruitName"><br>
+        Price: <input type="text" name="fprice" id="fruitPrice"><br>
+        <button type="button" onclick="addFruitsToDB()">Submit</button>
     </div>
-        <button type ="button">Submit</button>
+        <button type="button" onclick="toggleFruits()">Add Fruit</button>
         </form>
         <br/> 
 
@@ -37,12 +40,13 @@
       {{> flowercard}}
       </table>
       </div>
-          <div class ="hiddenFruits">
-        <form id="addFruits" action="/fruitFlowers" method="post">
-        Flower Name: <input type="text" name="fflower_name"><br>
-        Flower Color: <input type="text" name="fflower_color"><br>
+          <div id ="hiddenFlowers">
+        <form id="addFlowers"  method="post">
+        Flower Name: <input type="text" name="fflower_name" id="flowerName"><br>
+        Flower Color: <input type="text" name="fflower_color" id="flowerColor"><br>
+        <button type = "button" onclick="addFlowersToDB()">Submit</button>
       </div>
-        <button type="button">Submit</button>
+        <button type="button" onclick="toggleFlowers()">Add Flower</button>
         </form>
         <br/>
     </div>

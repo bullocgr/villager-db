@@ -61,10 +61,10 @@ body {
 }
 
 
-.hiddenFruits {
+#hiddenFruits {
   display: none;
 }
 
-.hiddenFLowers {
+#hiddenFlowers {
   display: none;
 }

@@ -1,5 +1,6 @@
 <meta name="Login">
 <link rel="stylesheet" href="/css/login.css">
+<script src="login.js" charset="utf-8" defer></script>
 
         <form id="addUser" action="/login" method="post">
         Username: <input type="text" name="fusername"><br>
@@ -16,13 +17,13 @@
 </header>
 <body>
 	<div class = "box">
-	 <label for="fusername"><b>User ID  </b></label>
-    <input type="user" placeholder="" name="fusername" required>
+	 <label for="fusername" ><b>User ID  </b></label>
+    <input type="user" placeholder="" id="userID" name="fusername" required>
 
-    <label for="fpassword"><b>Password</b></label>
-    <input type="password" placeholder="" name="fpassword" required>
+    <label for="fpassword" ><b>Password</b></label>
+    <input type="password" placeholder="" id="password" name="fpassword" required>
         
-    <button type="enter">ENTER</button>
+    <button type="enter" onclick="userLogin()">ENTER</button>
 	</div>
 </body>
 
