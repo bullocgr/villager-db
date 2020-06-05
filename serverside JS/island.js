@@ -71,18 +71,21 @@ module.exports = function(){
 
 //     /*Display all people. Requires web based javascript to delete users with AJAX*/
 
-//     router.get('/', function(req, res){
-//         var callbackCount = 0;
-//         var context = {};
-//         context.jsscripts = ["deleteperson.js","filterpeople.js","searchpeople.js"];
-//         var mysql = req.app.get('mysql');
-//         getPeople(res, mysql, context, complete);
-//         getPlanets(res, mysql, context, complete);
-//         function complete(){
-//             callbackCount++;
-//             if(callbackCount >= 2){
-//                 res.render('people', context);
-//             }
+       router.get('/', function(req, res){
+         var callbackCount = 0;
+         var context = {};
+         context.jsscripts = [];
+         var mysql = req.app.get('mysql');
+         getislandDetails(res, mysql, context, complete);
+         getIslandFruits(res, mysql, context, complete);
+         getFlowersIsland(res, mysql, context, complete);
+         getislandVillagers(res, mysql, context, complete);
+         getperson(res, mysql, context, complete);
+         function complete(){
+             callbackCount++;
+             if(callbackCount >= 5){
+                 res.render('islandDetails', context);
+             }
 
 //         }
 //     });

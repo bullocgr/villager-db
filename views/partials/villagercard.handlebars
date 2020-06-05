@@ -1,4 +1,5 @@
-          {{#each villager}}
+
+          {{#each villagers}}
             <div class="Villager-card">
                 <img id="villager-image" src={{image}} alt="Villager-picture" style="width:100%">
                 <ul id="villager-text">
@@ -8,5 +9,5 @@
                     <td><input type="button" value="Delete Row" onclick="deleteVillager(this)"></td>
                 </ul>
                 <div style="clear:both"></div>
-            </div> 
+            </div>
             {{/each}}
