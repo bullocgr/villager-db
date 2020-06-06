@@ -1,5 +1,5 @@
 	
-input[type=user], input[type=password] {
+input[type=text], input[type=text] {
   width: 75%;
   padding: 12px 40px;
   margin: 8px;
@@ -7,28 +7,35 @@ input[type=user], input[type=password] {
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
   text-align: left;
+  
+  
+}
+label {
+  float: left;
+  position: relative;
+  top: 20px;
+  padding-left: 20px;
 }
 .box{
-		background-color:#D3D3D3;
-	padding-top: 150px;
+    background-color:#D3D3D3;
+     padding-top: 150px;
+     /* change width back to 500px when issue is fixed*/
     width: 500px;
-    height: 200px;
-    top: 50%;
+    height: 400px;
+    top: 60%;
     left: 50%;
     position: absolute;
     margin-top: -200px;
     margin-left: -250px;
-    	text-align: center;
-
-	border: 3px solid black;
-
-	overflow: auto;
- 	position: absolute;
+    text-align: center;
+	  border: 3px solid black;
+  	overflow: auto;
+ 	  position: absolute;
 }
 
 #login_header{
-  background-color: #D3D3D3; 
-  	  top: 50%;
+    background-color: #D3D3D3;
+  	top: 60%;
     left: 50%;
     font-size: 26px;
     width: 300px;
@@ -36,24 +43,19 @@ input[type=user], input[type=password] {
     margin-top: -380px;
     margin-left: -147px;
     position: absolute;
-
     text-align: center;
-
-	border: 3px solid black;
-
-	overflow: auto;
- 	position: absolute;
+	  border: 3px solid black;
+  	overflow: auto;
+  	position: absolute;
 }
-button[type=enter]{
-
+input[type=submit]{
 	background-color: #D3D3D3;
-
   border: none;
-
   padding: 15px 32px;
   text-align: center;
+  margin-left: 60px;
   text-decoration: none;
   display: inline-block;
   font-size: 40px;
-}
+  
 }
