@@ -28,7 +28,7 @@ module.exports = function(){
     router.get('/', function(req, res){
       var callbackCount = 0
       var context = {};
-      context.jsscripts = [];
+      context.jsscripts = ["addFlowersToDB"];
       var mysql = req.app.get('mysql');
       getFruits(res, mysql, context, complete);
       getFlowers(res, mysql, context, complete);
@@ -41,6 +41,33 @@ module.exports = function(){
       }
     });
 
+//    function addFlowersToDB(res, mysql, context, complete){
+//      mysql.pool.query(sql, inserts, function(error, results, fields){
+//        if(error){
+//              res.write(JSON.stringify(error));
+//              res.end();
+//          }
+//          complete();
+//      });
+
+
+//    }
+
+
+//    router.post('/flowers', function(req, res) {
+//      var mysql = req.app.get('mysql');
+//      var sql = "Insert into fruit values (?,?)";
+//      var inserts = [req.body.fflower_name, req.body.fflower_color];
+//      sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+//        if(error){
+//            console.log(JSON.stringify(error))
+//            res.write(JSON.stringify(error));
+//            res.end();
+//        }else{
+//            res.redirect('/fruitFlowers');
+//        }
+//      });
+//    });
 
      return router;
      }();

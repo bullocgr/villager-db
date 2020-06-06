@@ -18,9 +18,11 @@ app.get('/', function(req, res) {
     res.render('homepage')
 });
 
-app.get('/island', function(req, res) {
-    res.render('island')
-});
+
+app.use('/island', require('./serverside JS/island.js'));
+//app.get('/island', function(req, res) {
+//    res.render('island')
+//});
 
 app.use('/fruitFlowers', require('./serverside JS/fruitFlowers.js'));
 //app.get('/fruitFlowers', function(req, res) {
@@ -44,7 +46,7 @@ app.use('/villagers', require('./serverside JS/villager.js'));
 
 
 
-app.use('/island', express.static(__dirname + 'island' ));
+//app.use('/island', express.static(__dirname + 'island' ));
 
 app.listen(port, function (err) {
   if (err) {
