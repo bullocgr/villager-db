@@ -55,6 +55,7 @@ CONSTRAINT `has_fk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
 
 
 CREATE TABLE `grows` (
+`native` boolean NOT NULL, 
 `fruit_id` int(11) NOT NULL,
 `player_id` int(11) NOT NULL,
 CONSTRAINT `grows_fk_1` FOREIGN KEY (`fruit_id`) REFERENCES `fruit` (`id`),
@@ -218,15 +219,15 @@ INSERT INTO fruit VALUES (null, "Peach", 400);
 
 INSERT INTO fruit VALUES (null, "Apple", 400);
 
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Orange"), (SELECT id FROM player WHERE island_name = "=^.^="));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Peach"), (SELECT id FROM player WHERE island_name = "=^.^="));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Apple"), (SELECT id FROM player WHERE island_name = "=^.^="));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Cherry"), (SELECT id FROM player WHERE island_name = "=^.^="));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Pear" ), (SELECT id FROM player WHERE island_name = "=^.^="));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Cherry"), (SELECT id FROM player WHERE island_name = "han"));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Pear"), (SELECT id FROM player WHERE island_name = "han"));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Apple"), (SELECT id FROM player WHERE island_name = "han"));
-INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Peach"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES (true, (SELECT id FROM fruit WHERE name = "Orange"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES (false, (SELECT id FROM fruit WHERE name = "Peach"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES (true, (SELECT id FROM fruit WHERE name = "Apple"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES (false, (SELECT id FROM fruit WHERE name = "Cherry"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES (true, (SELECT id FROM fruit WHERE name = "Pear" ), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES (false, (SELECT id FROM fruit WHERE name = "Cherry"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES (true, (SELECT id FROM fruit WHERE name = "Pear"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES (false, (SELECT id FROM fruit WHERE name = "Apple"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES (true, (SELECT id FROM fruit WHERE name = "Peach"), (SELECT id FROM player WHERE island_name = "han"));
 
 
 INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Admiral"), (SELECT id FROM player WHERE island_name = "=^.^="), (SELECT id FROM villager WHERE name = "Admiral"), 3, false, 2020-03-20);

@@ -15,27 +15,27 @@ module.exports = function(){
 
     function getPlayerDetails(res, mysql, context, complete){
       var query = "SELECT player.id FROM island where island.name = ?"
-      console.log(req.params)
+      console.log(req.params);
       var inserts = [req.params.islandname]
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.playerid = results;
+            context.islandDetails = results;
             complete();
         });
     }
     function getIslandFruits(req, res, mysql, context, complete){
-      var query = "SELECT fruit.name AS name, fruit.price AS price FROM fruit INNER JOIN grows ON grows.player_id = player.id"
-      console.log(req.params)
-      var inserts = [req.params.playerid]
+      var query = "SELECT fruit.name AS fruit_name, fruit.price AS price FROM fruit INNER JOIN grows ON grows.player_id = ?"
+      var inserts = [10];
+      console.log(inserts);
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.IslandFruits = results;
+            context.islandDetails = results;
             complete();
         });
     }
@@ -43,28 +43,28 @@ module.exports = function(){
 
     function getFlowersIsland(req, res, mysql, context, complete){
     var query = "SELECT flower.name AS name, flower.color AS color FROM flower INNER JOIN has ON has.player_id = player.id"
-      console.log(req.params)
-      var inserts = [req.params.playerid]
+      console.log(req.params);
+      var inserts = [req.params.playerid];
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.flowersIsland = results;
+            context.islandDetails = results;
             complete();
         });
     }
 
     function getislandVillagers(req, res, mysql, context, complete){
      var query = "SELECT member.villager_name AS name, member.rating AS rating, member.favorite AS favorite FROM member WHERE member.player_id = player.id"
-      console.log(req.params)
-      var inserts = [req.params.playerid]
+      console.log(req.params);
+      var inserts = [req.params.playerid];
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.IslandVillagers = results;
+            context.islandDetails = results;
             complete();
         });
     }
@@ -87,6 +87,8 @@ module.exports = function(){
              if(callbackCount >= 5){
                  res.render('islandDetails', context);
              }
+}
+});
 
 //         }
 //     });

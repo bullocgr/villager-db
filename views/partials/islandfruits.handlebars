@@ -3,8 +3,9 @@
         {{#each fruit}}
         <tr> 
             <td>{{fruit_name}}</td>
+            <td>{{price}}</td>
             <td>{{native}}</td>
-            <td><input type="button" value="Delete Row" onclick="deleteIslandFruit(this)"></td>
+            <td><input type="button" value="Delete Row" onclick="deleteIslandFruit({{id}})"></td>
 
         </tr>
         {{/each}}

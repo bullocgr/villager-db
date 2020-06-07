@@ -16,25 +16,6 @@ module.exports = function(){
         });
     }
 
-    router.post('/login', function(req,res,next){
-    var mysql = req.app.get('mysql');
-    var user = {
-      username: req.body.username,
-      password: req.body.password
-    };
-
-    getAccount(req, res, mysql, context, complete);
-
-  });
-
-  router.post('/login', function(req, res, next){
-    var mysql = req.app.get('mysql');
-    var user = {
-      island_name: req.body.island_name,
-      username: req.body.username,
-      password: req.body.password,
-    };
-
      return router;
      }();
 
