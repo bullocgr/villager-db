@@ -2,12 +2,12 @@
 <link rel="stylesheet" href="/css/login.css">
 <script src="login.js" charset="utf-8" defer></script>
 
-        <form id="addUser" action="/login" method="post">
+       {{! <form id="addUser" action="/login" method="post">
         Username: <input type="text" name="fusername"><br>
         Password: <input type="text" name="fpassword"><br>
         <input type="submit" value="Submit">
         </form>
-        <br/>
+        <br/>}}
 
 
 <header>
@@ -15,15 +15,24 @@
 		<h1>Log in</h1>
 	</div>
 </header>
+
 <body>
 	<div class = "box">
-	 <label for="fusername" ><b>User ID  </b></label>
+	 {{!<label for="fusername" ><b>User ID  </b></label>
     <input type="user" placeholder="" id="userID" name="fusername" required>
 
     <label for="fpassword" ><b>Password</b></label>
     <input type="password" placeholder="" id="password" name="fpassword" required>
         
-    <button type="enter" onclick="userLogin()">ENTER</button>
+    <button type="enter" onclick="userLogin()">ENTER</button>--}}
+       <form id="addUser" action="/login" method="post">
+        <label><b>Username:</b></label> <input type="text" name="fusername"><br>
+        <label><b>Password:</b></label> <input type="text" name="fpassword"><br>
+        <input type="submit" value="Submit">
+        </form>
+        <br/>
 	</div>
 </body>
+
+
 

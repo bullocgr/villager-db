@@ -2,6 +2,7 @@ var path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
 
+var bodyParser = require('body-parser');
 var app = express();
 var mysql = require('./dbcon.js');
 var port = 3001;
@@ -14,6 +15,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('mysql', mysql);
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function(req, res) {
     res.render('homepage')
 });
@@ -39,8 +41,6 @@ app.use('/villagers', require('./serverside JS/villager.js'));
 //app.get('/villagers', function(req, res) {
 //    res.render('villagers')
 //});
-
-
 
 
 

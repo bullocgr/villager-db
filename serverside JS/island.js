@@ -13,10 +13,23 @@ module.exports = function(){
         });
     }
 
-    function getIslandFruits(req, res, mysql, context, complete){
-      var query = "SELECT player.player_name AS name, grows.fruit_name AS fruit_name, FROM player INNER JOIN grows ON player.island_name=grows.island_name";
+    function getPlayerDetails(res, mysql, context, complete){
+      var query = "SELECT player.id FROM island where island.name = ?"
       console.log(req.params)
-      var inserts = [req.params.islandName]
+      var inserts = [req.params.islandname]
+      mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.playerid = results;
+            complete();
+        });
+    }
+    function getIslandFruits(req, res, mysql, context, complete){
+      var query = "SELECT fruit.name AS name, fruit.price AS price FROM fruit INNER JOIN grows ON grows.player_id = player.id"
+      console.log(req.params)
+      var inserts = [req.params.playerid]
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -29,9 +42,9 @@ module.exports = function(){
 
 
     function getFlowersIsland(req, res, mysql, context, complete){
-      var query = "SELECT flower_name, flower_color FROM has WHERE island_name = :selected_island_name_flowers";
+    var query = "SELECT flower.name AS name, flower.color AS color FROM flower INNER JOIN has ON has.player_id = player.id"
       console.log(req.params)
-      var inserts = [req.params.islandName]
+      var inserts = [req.params.playerid]
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -43,9 +56,9 @@ module.exports = function(){
     }
 
     function getislandVillagers(req, res, mysql, context, complete){
-      var query = "SELECT island.name, member.villager_name, member.favorite, FROM island INNER JOIN member ON island.name = member.island_name";
+     var query = "SELECT member.villager_name AS name, member.rating AS rating, member.favorite AS favorite FROM member WHERE member.player_id = player.id"
       console.log(req.params)
-      var inserts = [req.params.islandName]
+      var inserts = [req.params.playerid]
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -56,18 +69,6 @@ module.exports = function(){
         });
     }
 
-    function getPerson(res, mysql, context, id, complete){
-        var sql = "SELECT character_id as id, fname, lname, homeworld, age FROM bsg_people WHERE character_id = ?";
-        var inserts = [id];
-        mysql.pool.query(sql, inserts, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.person = results[0];
-            complete();
-        });
-    }
 
 //     /*Display all people. Requires web based javascript to delete users with AJAX*/
 

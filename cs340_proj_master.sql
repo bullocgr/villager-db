@@ -21,32 +21,33 @@ UNIQUE(`password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `flower` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(255) NOT NULL,
 `color` VARCHAR(255) NOT NULL,
-PRIMARY KEY (`name`,`color`)
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `fruit` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(255) NOT NULL,
 `price` int(11) NOT NULL,
-PRIMARY KEY (`name`)
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `villager` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
 `image` VARCHAR(255) NOT NULL,
 `name` VARCHAR(255) NOT NULL,
 `personality` VARCHAR(255) NOT NULL,
 `animal` VARCHAR(255) NOT NULL,
-PRIMARY KEY (`name`)
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `has` (
-`flower_name` VARCHAR(255) NOT NULL,
-`flower_color` VARCHAR(255) NOT NULL,
-`island_name` VARCHAR(255) NOT NULL,
-CONSTRAINT `has_fk_1` FOREIGN KEY (`flower_name`,`flower_color`) REFERENCES `flower` (`name`,`color`),
-CONSTRAINT `has_fk_2` FOREIGN KEY (`island_name`) REFERENCES `island` (`name`)
-
+`flower_id` int(11) NOT NULL,
+`player_id` int(11) NOT NULL,
+CONSTRAINT `has_fk_1` FOREIGN KEY (`flower_id`) REFERENCES `flower` (`id`),
+CONSTRAINT `has_fk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -54,231 +55,223 @@ CONSTRAINT `has_fk_2` FOREIGN KEY (`island_name`) REFERENCES `island` (`name`)
 
 
 CREATE TABLE `grows` (
-`fruit_name` VARCHAR(255) NOT NULL,
-`island_name` VARCHAR(255) NOT NULL,
-`native` BOOLEAN NOT NULL,
-CONSTRAINT `grows_fk_1` FOREIGN KEY (`fruit_name`) REFERENCES `fruit` (`name`),
-CONSTRAINT `grows_fk_2` FOREIGN KEY (`island_name`) REFERENCES `island` (`name`)
+`fruit_id` int(11) NOT NULL,
+`player_id` int(11) NOT NULL,
+CONSTRAINT `grows_fk_1` FOREIGN KEY (`fruit_id`) REFERENCES `fruit` (`id`),
+CONSTRAINT `grows_fk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
 CREATE TABLE `member` (
 `villager_name` VARCHAR(255) NOT NULL,
-`island_name` VARCHAR(255) NOT NULL,
+`player_id` int(11) NOT NULL,
+`vid` int(11) NOT NULL,
 `rating` int(11) NOT NULL,
 `favorite` boolean,
 `join_date` date,
-CONSTRAINT `member_fk_1` FOREIGN KEY (`villager_name`) REFERENCES `villager` (`name`),
-CONSTRAINT `member_fk_2` FOREIGN KEY (`island_name`) REFERENCES `island` (`name`)
+CONSTRAINT `member_fk_1` FOREIGN KEY (`vid`) REFERENCES `villager` (`id`),
+CONSTRAINT `member_fk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
-INSERT INTO island VALUES ("=^.^=", "North", 2020-03-20);
+INSERT INTO island VALUES (null, "=^.^=", "North", 2020-03-20);
 
-INSERT INTO island VALUES ("my island", "South", 2020-03-25);
+INSERT INTO island VALUES (null, "my island", "South", 2020-03-25);
 
-INSERT INTO island VALUES ("pen island", "South", 2020-03-30);
+INSERT INTO island VALUES (null, "pen island", "South", 2020-03-30);
 
-INSERT INTO island VALUES ("ooboon", "South", 2020-04-20);
+INSERT INTO island VALUES (null, "ooboon", "South", 2020-04-20);
 
-INSERT INTO island VALUES ("beaver", "North", 2020-04-01);
+INSERT INTO island VALUES (null, "beaver", "North", 2020-04-01);
 
-INSERT INTO island VALUES ("kanto", "North", 2020-05-06);
+INSERT INTO island VALUES (null, "kanto", "North", 2020-05-06);
 
-INSERT INTO island VALUES ("han", "South", 2020-04-10);
+INSERT INTO island VALUES (null, "han", "South", 2020-04-10);
 
-INSERT INTO island VALUES ("i started late", "South", 2020-03-21);
+INSERT INTO island VALUES (null, "i started late", "South", 2020-03-21);
 
-INSERT INTO island VALUES ("terraria", "North", 2020-03-22);
+INSERT INTO island VALUES (null, "terraria", "North", 2020-03-22);
 
-INSERT INTO island VALUES ("noice", "North", 2020-03-22);
+INSERT INTO island VALUES (null, "noice", "North", 2020-03-22);
 
 ​
 
-INSERT INTO player VALUES (1, "Grace", "gswizzle", "Password", (SELECT name FROM island WHERE name = "=^.^="));
+INSERT INTO player VALUES (1, "Grace", "gswizzle", "SuperPassword", (SELECT name FROM island WHERE name = "=^.^="));
 
 INSERT INTO player VALUES (null, "Soren", "soccersoren", "Password", (SELECT name FROM island WHERE name = "my island"));
 
-INSERT INTO player VALUES (null, "Gabi", "gabiv", "Password", (SELECT name FROM island WHERE name = "pen island"));
+INSERT INTO player VALUES (null, "Gabi", "gabiv", "NotPassword", (SELECT name FROM island WHERE name = "pen island"));
 
-INSERT INTO player VALUES (null, "Reed", "bbr", "Password", (SELECT name FROM island WHERE name = "ooboon"));
+INSERT INTO player VALUES (null, "Reed", "bbr", "PPassword", (SELECT name FROM island WHERE name = "ooboon"));
 
-INSERT INTO player VALUES (null, "Alex", "Alex1", "Password", (SELECT name FROM island WHERE name = "beaver"));
+INSERT INTO player VALUES (null, "Alex", "Alex1", "Password123", (SELECT name FROM island WHERE name = "beaver"));
 
-INSERT INTO player VALUES (null, "Eric", "Ickabon", "Password", (SELECT name FROM island WHERE name = "kanto"));
+INSERT INTO player VALUES (null, "Eric", "Ickabon", "Password456", (SELECT name FROM island WHERE name = "kanto"));
 
-INSERT INTO player VALUES (null, "Will", "Will1", "Password", (SELECT name FROM island WHERE name = "han"));
+INSERT INTO player VALUES (null, "Will", "Will1", "Password789", (SELECT name FROM island WHERE name = "han"));
 
-INSERT INTO player VALUES (null, "Matthew", "matt", "Password", (SELECT name FROM island WHERE name = "i started late"));
+INSERT INTO player VALUES (null, "Matthew", "matt", "PasswordRemeber", (SELECT name FROM island WHERE name = "i started late"));
 
-INSERT INTO player VALUES (null, "Boy", "boi", "Password", (SELECT name FROM island WHERE name = "terraria"));
+INSERT INTO player VALUES (null, "Boy", "boi", "PasswordPls", (SELECT name FROM island WHERE name = "terraria"));
 
-INSERT INTO player VALUES (null, "Karson", "kkslider", "Password", (SELECT name FROM island WHERE name = "noice"));
+INSERT INTO player VALUES (null, "Karson", "kkslider", "Passwor", (SELECT name FROM island WHERE name = "noice"));
 
 ​
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/0/07/Admiral_HD.png/revision/latest/scale-to-width-down/350?cb=20180518160412", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/0/07/Admiral_HD.png/revision/latest/scale-to-width-down/350?cb=20180518160412", 
 
     "Admiral", "Cranky", "Bird");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/d/dd/NH-Agent_S_poster.png/revision/latest/scale-to-width-down/100?cb=20200410184209", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/d/dd/NH-Agent_S_poster.png/revision/latest/scale-to-width-down/100?cb=20200410184209", 
 
     "Agent S", "Peppy", "Squirrel");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/e/e8/NH-Agnes_poster.png/revision/latest/scale-to-width-down/100?cb=20200410185748", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/e/e8/NH-Agnes_poster.png/revision/latest/scale-to-width-down/100?cb=20200410185748", 
 
     "Agnes", "Sisterly", "Pig");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/3/33/NH-Aurora_poster.png/revision/latest/scale-to-width-down/100?cb=20200410190924", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/3/33/NH-Aurora_poster.png/revision/latest/scale-to-width-down/100?cb=20200410190924", 
 
     "Aurora", "Normal", "Penguin");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/2/2a/NH-Beau_poster.png/revision/latest/scale-to-width-down/100?cb=20200328183936", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/2/2a/NH-Beau_poster.png/revision/latest/scale-to-width-down/100?cb=20200328183936", 
 
     "Beau", "Lazy", "Deer");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/4/4c/NH-Bill_poster.png/revision/latest?cb=20200328184045", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/4/4c/NH-Bill_poster.png/revision/latest?cb=20200328184045", 
 
     "Bill", "Jock", "Duck");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/3/37/NH-Coco_poster.png/revision/latest?cb=20200410185633", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/3/37/NH-Coco_poster.png/revision/latest?cb=20200410185633", 
 
     "Coco", "Normal", "Rabbit");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/9/95/NH-Derwin_poster.png/revision/latest/scale-to-width-down/100?cb=20200328200856", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/9/95/NH-Derwin_poster.png/revision/latest/scale-to-width-down/100?cb=20200328200856", 
 
     "Derwin", "Lazy", "Duck");
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/7/78/NH-Puddles_poster.png/revision/latest/scale-to-width-down/100?cb=20200328224601", 
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/7/78/NH-Puddles_poster.png/revision/latest/scale-to-width-down/100?cb=20200328224601", 
 
     "Puddles", "Peppy", "Frog"); 
 
-INSERT INTO villager VALUES ("https://vignette.wikia.nocookie.net/animalcrossing/images/0/0a/NH-Stitches_poster.png/revision/latest/scale-to-width-down/100?cb=20200328232329",
+INSERT INTO villager VALUES (null, "https://vignette.wikia.nocookie.net/animalcrossing/images/0/0a/NH-Stitches_poster.png/revision/latest/scale-to-width-down/100?cb=20200328232329",
 
     "Stitches", "Lazy", "Cub");
 
 ​
 
-INSERT INTO flower VALUES ("Cosmo", "Red");
+INSERT INTO flower VALUES (null, "Cosmo", "Red");
 
-INSERT INTO flower VALUES ("Cosmo", "White");
+INSERT INTO flower VALUES (null, "Cosmo", "White");
 
-INSERT INTO flower VALUES ("Cosmo", "Yellow");
+INSERT INTO flower VALUES (null, "Cosmo", "Yellow");
 
-INSERT INTO flower VALUES ("Rose", "Red");
+INSERT INTO flower VALUES (null, "Rose", "Red");
 
-INSERT INTO flower VALUES ("Rose", "Yellow");
+INSERT INTO flower VALUES (null, "Rose", "Yellow");
 
-INSERT INTO flower VALUES ("Rose", "White");
+INSERT INTO flower VALUES (null, "Rose", "White");
 
-INSERT INTO flower VALUES ("Tulip", "Red");
+INSERT INTO flower VALUES (null, "Tulip", "Red");
 
-INSERT INTO flower VALUES ("Tulip", "White");
+INSERT INTO flower VALUES (null, "Tulip", "White");
 
-INSERT INTO flower VALUES ("Tulip", "Yellow");
+INSERT INTO flower VALUES (null, "Tulip", "Yellow");
 
-INSERT INTO flower VALUES ("Pansie", "Red");
+INSERT INTO flower VALUES (null, "Pansie", "Red");
 
-INSERT INTO flower VALUES ("Pansie", "White");
+INSERT INTO flower VALUES (null, "Pansie", "White");
 
-INSERT INTO flower VALUES ("Pansie", "Yellow");
+INSERT INTO flower VALUES (null, "Pansie", "Yellow");
 
-INSERT INTO flower VALUES ("Lily", "Red");
+INSERT INTO flower VALUES (null, "Lily", "Red");
 
-INSERT INTO flower VALUES ("Lily", "White");
+INSERT INTO flower VALUES (null, "Lily", "White");
 
-INSERT INTO flower VALUES ("Lily", "Yellow");
+INSERT INTO flower VALUES (null, "Lily", "Yellow");
 
-INSERT INTO flower VALUES ("Windflower", "Red");
+INSERT INTO flower VALUES (null, "Windflower", "Red");
 
-INSERT INTO flower VALUES ("Windflower", "Orange");
+INSERT INTO flower VALUES (null, "Windflower", "Orange");
 
-INSERT INTO flower VALUES ("Windflower", "White");
+INSERT INTO flower VALUES (null, "Windflower", "White");
 
-INSERT INTO flower VALUES ("Hyacinth", "Red");
+INSERT INTO flower VALUES (null, "Hyacinth", "Red");
 
-INSERT INTO flower VALUES ("Hyacinth", "White");
+INSERT INTO flower VALUES (null, "Hyacinth", "White");
 
-INSERT INTO flower VALUES ("Hyacinth", "Yellow");
+INSERT INTO flower VALUES (null, "Hyacinth", "Yellow");
 
-INSERT INTO flower VALUES ("Mum", "Red");
+INSERT INTO flower VALUES (null, "Mum", "Red");
 
-INSERT INTO flower VALUES ("Mum", "White");
+INSERT INTO flower VALUES (null, "Mum", "White");
 
-INSERT INTO fruit VALUES ("Orange", 400);
+INSERT INTO fruit VALUES (null, "Orange", 400);
 
-INSERT INTO fruit VALUES ("Cherry", 400);
+INSERT INTO fruit VALUES (null, "Cherry", 400);
 
-INSERT INTO fruit VALUES ("Pear", 400);
+INSERT INTO fruit VALUES (null, "Pear", 400);
 
-INSERT INTO fruit VALUES ("Peach", 400);
+INSERT INTO fruit VALUES (null, "Peach", 400);
 
-INSERT INTO fruit VALUES ("Apple", 400);
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Pear"), (SELECT name FROM island WHERE name = "=^.^="), true);
+INSERT INTO fruit VALUES (null, "Apple", 400);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Apple"), (SELECT name FROM island WHERE name = "=^.^="), false);
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Orange"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Peach"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Apple"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Cherry"), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Pear" ), (SELECT id FROM player WHERE island_name = "=^.^="));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Cherry"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Pear"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Apple"), (SELECT id FROM player WHERE island_name = "han"));
+INSERT INTO grows VALUES ((SELECT id FROM fruit WHERE name = "Peach"), (SELECT id FROM player WHERE island_name = "han"));
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Peach"), (SELECT name FROM island WHERE name = "=^.^="), false);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Cherry"), (SELECT name FROM island WHERE name = "=^.^="), false);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Admiral"), (SELECT id FROM player WHERE island_name = "=^.^="), (SELECT id FROM villager WHERE name = "Admiral"), 3, false, 2020-03-20);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Orange"), (SELECT name FROM island WHERE name = "=^.^="), false);
+INSERT INTO member VALUES ((SELECT  name FROM villager WHERE name = "Agent S"), (SELECT id FROM player WHERE island_name = "=^.^="), (SELECT id FROM villager WHERE name = "Agent S") ,5, true, 2020-03-20);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Pear"), (SELECT name FROM island WHERE name = "my island"), false);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Agnes"), (SELECT id FROM player WHERE island_name = "=^.^="), (SELECT id FROM villager WHERE name = "Agnes"), 3, false, 2020-04-20);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Apple"), (SELECT name FROM island WHERE name = "my island"), false);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Aurora"), (SELECT id FROM player WHERE island_name = "beaver"), (SELECT id FROM villager WHERE name = "Aurora"), 5, true, 2020-03-21);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Peach"), (SELECT name FROM island WHERE name = "my island"), true);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Beau"), (SELECT id FROM player WHERE island_name = "beaver"), (SELECT id FROM villager WHERE name = "Beau"), 5, true, 2020-05-01);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Cherry"), (SELECT name FROM island WHERE name = "my island"), false);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Bill"), (SELECT id FROM player WHERE island_name = "han"), (SELECT id FROM villager WHERE name = "Bill"), 2, false, 2020-04-06);
 
-INSERT INTO grows VALUES ((SELECT name FROM fruit WHERE name = "Orange"), (SELECT name FROM island WHERE name = "my island"), false);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Coco"), (SELECT id FROM player WHERE island_name = "han"), (SELECT id FROM villager WHERE name = "Coco") ,4, true, 2020-04-06);
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Admiral"), (SELECT name FROM island WHERE name = "=^.^="), 3, false, 2020-03-20);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Derwin"), (SELECT id FROM player WHERE island_name = "han"), (SELECT id FROM villager WHERE name = "Derwin"), 1, false, 2020-04-15);
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Agent S"), (SELECT name FROM island WHERE name = "my island"), 5, true, 2020-03-20);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Puddles"), (SELECT id FROM player WHERE island_name = "han"), (SELECT id FROM villager WHERE name = "Puddles") ,1, false, 2020-03-21);
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Agnes"), (SELECT name FROM island WHERE name = "pen island"), 3, false, 2020-04-20);
+INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Stitches"), (SELECT id FROM player WHERE island_name = "noice"), (SELECT id FROM villager WHERE name = "Stitches"), 5, true, 2020-03-27);
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Aurora"), (SELECT name FROM island WHERE name = "ooboon"), 5, true, 2020-03-21);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Pansie" AND color = "Red"),  (SELECT id FROM player WHERE island_name = "=^.^="));
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Beau"), (SELECT name FROM island WHERE name = "beaver"), 5, true, 2020-05-01);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Lily" AND color = "White"),  (SELECT id FROM player WHERE island_name = "=^.^="));
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Bill"), (SELECT name FROM island WHERE name = "kanto"), 2, false, 2020-04-06);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Hyacinth" AND color = "Yellow"),  (SELECT id FROM player WHERE island_name = "=^.^="));
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Coco"), (SELECT name FROM island WHERE name = "han"), 4, true, 2020-04-06);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Rose" AND color = "Red"),  (SELECT id FROM player WHERE island_name = "=^.^="));
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Derwin"), (SELECT name FROM island WHERE name = "i started late"), 1, false, 2020-04-15);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Cosmo" AND color = "Yellow"),  (SELECT id FROM player WHERE island_name = "=^.^="));
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Puddles"), (SELECT name FROM island WHERE name = "terraria"), 1, false, 2020-03-21);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Windflower" AND color = "Orange"),  (SELECT id FROM player WHERE island_name = "=^.^="));
 
-INSERT INTO member VALUES ((SELECT name FROM villager WHERE name = "Stitches"), (SELECT name FROM island WHERE name = "noice"), 5, true, 2020-03-27);
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Pansie" AND color = "Red"),  (SELECT id FROM player WHERE island_name = "my island"));
 
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Pansie" AND color = "Red"), "Red", (SELECT name FROM island WHERE name = "=^.^="));
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Lily" AND color = "White"),  (SELECT id FROM player WHERE island_name = "my island"));
 
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Lily" AND color = "White"), "White", (SELECT name FROM island WHERE name = "=^.^="));
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Hyacinth" AND color = "Yellow"),  (SELECT id FROM player WHERE island_name = "my island"));
 
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Hyacinth" AND color = "Yellow"), "Yellow", (SELECT name FROM island WHERE name = "=^.^="));
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Rose" AND color = "Red"),  (SELECT id FROM player WHERE island_name = "my island"));
 
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Rose" AND color = "Red"), "Red", (SELECT name FROM island WHERE name = "=^.^="));
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Cosmo" AND color ="Yellow"),  (SELECT id FROM player WHERE island_name = "my island"));
 
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Cosmo" AND color = "Yellow"), "Yellow", (SELECT name FROM island WHERE name = "=^.^="));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Windflower" AND color = "Orange"), "Orange", (SELECT name FROM island WHERE name = "=^.^="));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Pansie" AND color = "Red"), "Red", (SELECT name FROM island WHERE name = "my island"));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Lily" AND color = "White"), "White", (SELECT name FROM island WHERE name = "my island"));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Hyacinth" AND color = "Yellow"), "Yellow", (SELECT name FROM island WHERE name = "my island"));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Rose" AND color = "Red"), "Red", (SELECT name FROM island WHERE name = "my island"));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Cosmo" AND color ="Yellow"), "Yellow", (SELECT name FROM island WHERE name = "my island"));
-
-INSERT INTO has VALUES ((SELECT name FROM flower WHERE name = "Windflower" AND color ="Orange"), "Orange", (SELECT name FROM island WHERE name = "my island"));
+INSERT INTO has VALUES ((SELECT id FROM flower WHERE name = "Windflower" AND color ="Orange"), (SELECT id FROM player WHERE island_name = "my island"));
 
 -- ALL INPUTED INFO IS DENOTED WITH : BEFORE
 
