@@ -32,8 +32,8 @@
 <div class="hiddenVillager">
 <form id="add_favorite" action="/island" method="post">
         Villager: <select name='fvillager'>
-        {{#each villager}}
-        <option value='{{villager}}'>{{name}}</option>
+        {{#each fvillager}}
+        <option value={{fvillager}}>{{name}}</option>
         {{/each}}
         </select>
         <br>

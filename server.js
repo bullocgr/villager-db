@@ -37,6 +37,7 @@ app.get('/login', function(req, res) {
     res.render('login')
 });
 
+app.use('/island', require('./serverside JS/island.js'));
 app.use('/login', require('./serverside JS/login.js'));
 
 app.use('/villagers', require('./serverside JS/villager.js'));

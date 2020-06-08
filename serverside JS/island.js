@@ -2,21 +2,22 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getislandDetails(res, mysql, context, complete){
-        mysql.pool.query("SELECT island.name, island.location, island.start_date FROM island", function(error, results, fields){
+
+    function getVillagers(res, mysql, context, complete){
+        mysql.pool.query("SELECT name, image, personality, animal, id FROM villager", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
+                return router;
             }
-            context.islandDetails  = results;
+            context.fvillager  = results;
             complete();
         });
     }
 
-    function getPlayerDetails(res, mysql, context, complete){
-      var query = "SELECT player.id FROM island where island.name = ?"
-      console.log(req.params);
-      var inserts = [req.params.islandname]
+    function getPlayerDetails(req, res, mysql, context, complete){
+      var query = "SELECT island_name AS islandname FROM player WHERE id = ?";
+      var inserts = [req.params.id];
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -26,180 +27,194 @@ module.exports = function(){
             complete();
         });
     }
-    function getIslandFruits(req, res, mysql, context, complete){
-      var query = "SELECT fruit.name AS fruit_name, fruit.price AS price FROM fruit INNER JOIN grows ON grows.player_id = ?"
-      var inserts = [10];
-      console.log(inserts);
+
+    function getislandDetails(req, res, mysql, context, complete){
+        var query = "SELECT island.location, island.start_date FROM island WHERE island_name = ?";
+      var inserts = [req.params.id]
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
             context.islandDetails = results;
+            complete();
+        });
+}
+
+    function getIslandFruits(req, res, mysql, context, complete){
+      var query = "SELECT fruit.name AS fruit_name, fruit.price AS price, fruit.id as fruit_id FROM fruit INNER JOIN grows ON grows.player_id = ? AND grows.fruit_id = fruit.id";
+      var inserts = [req.params.id];
+      mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.fruit = results;
             complete();
         });
     }
 
 
     function getFlowersIsland(req, res, mysql, context, complete){
-    var query = "SELECT flower.name AS name, flower.color AS color FROM flower INNER JOIN has ON has.player_id = player.id"
-      console.log(req.params);
-      var inserts = [req.params.playerid];
+    var query = "SELECT flower.name AS flower_name, flower.color AS color, flower.id AS flower_id FROM flower INNER JOIN has ON has.player_id = ? AND has.flower_id = flower.id";
+      var inserts = [req.params.id];
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.islandDetails = results;
+            context.flower = results;
             complete();
         });
     }
 
     function getislandVillagers(req, res, mysql, context, complete){
-     var query = "SELECT member.villager_name AS name, member.rating AS rating, member.favorite AS favorite FROM member WHERE member.player_id = player.id"
-      console.log(req.params);
-      var inserts = [req.params.playerid];
+     var query = "SELECT villager_name AS name, rating, favorite, vid FROM member WHERE player_id = ?"
+      var inserts = [req.params.id];
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.islandDetails = results;
+            context.villager = results;
             complete();
         });
     }
 
 
-//     /*Display all people. Requires web based javascript to delete users with AJAX*/
+    function getIslandName(req, res, mysql, context, complete){
+        var query = "SELECT island_name FROM player WHERE id = ?";
+        
+        var inserts = [req.params.id];
+         mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
 
-       router.get('/', function(req, res){
-         var callbackCount = 0;
-         var context = {};
-         context.jsscripts = [];
-         var mysql = req.app.get('mysql');
-         getislandDetails(res, mysql, context, complete);
-         getIslandFruits(res, mysql, context, complete);
-         getFlowersIsland(res, mysql, context, complete);
-         getislandVillagers(res, mysql, context, complete);
-         getperson(res, mysql, context, complete);
-         function complete(){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+
+            return results[0].island_name;
+            complete();
+        });
+    }
+
+      router.get('/:id', function(req, res){
+        var callbackCount = 0;
+        context = {};
+        context.jsscripts = ["deleteIslandVillager.js", "deleteIslandfruit.js", "deleteIslandFlower.js"];
+        var mysql = req.app.get('mysql');
+
+      //  getislandDetails(req, res, mysql, context, complete);
+        getIslandFruits(req, res, mysql, context, complete);
+        getFlowersIsland(req, res, mysql, context, complete);
+        getislandVillagers(req, res, mysql, context, complete);
+        getVillagers(res, mysql, context, complete);
+        function complete(){
              callbackCount++;
-             if(callbackCount >= 5){
-                 res.render('islandDetails', context);
+             if(callbackCount >= 4){
+                 res.render('island', context);
+
              }
 }
 });
 
-//         }
-//     });
+  router.delete('/dlV/:vid', function(req,res, next){
+    var mysql = req.app.get('mysql');
+    var sql = "DELETE FROM member WHERE vid = ? AND player_id = ?";
+    var inserts = [req.params.vid, req.params.id];
+    console.log(inserts);
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.status(202).end();
+      }
+    })
+  })
 
-//     /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
-//     router.get('/filter/:homeworld', function(req, res){
+    router.delete('/dlFL/:flid', function(req,res, next){
+    var mysql = req.app.get('mysql');
+    var sql = "DELETE FROM has WHERE flower_id = ? AND player_id = ?";
+    var inserts = [req.params.flid, req.params.id];
+    console.log(inserts);
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.status(202).end();
+      }
+    })
+  })
+
+    router.delete('/dlFR/:frid', function(req,res, next){
+    var mysql = req.app.get('mysql');
+    var sql = "DELETE FROM grows WHERE fruit_id = ? AND player_id = ?";
+    var inserts = [req.params.frid, req.params.id];
+    console.log(inserts);
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.status(202).end();
+      }
+    })
+  })
+
+    router.post('/Addvill/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO member (image, name, personality, animal) VALUES (?,?,?,?)";
+        var inserts = [req.body.fimage, req.body.fname, req.body.fpersonality, req.body.fanimal];
+        console.log(inserts);
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/island/' + req.params.id);
+            }
+        });
+    });
+        router.post('/Addflow/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO has (flower_name, player_id) VALUES (?,?)";
+        var inserts = [req.body.fl, req.body];
+        console.log(inserts);
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/island/' + req.params.id);
+            }
+        });
+    });
+
+//     /*Display all people. Requires web based javascript to delete users with AJAX*/
+//       router.get('/', function(req, res){
+//         console.log("got here");
 //         var callbackCount = 0;
-//         var context = {};
-//         context.jsscripts = ["deleteperson.js","filterpeople.js","searchpeople.js"];
-//         var mysql = req.app.get('mysql');
-//         getPeoplebyHomeworld(req,res, mysql, context, complete);
-//         getPlanets(res, mysql, context, complete);
-//         function complete(){
-//             callbackCount++;
-//             if(callbackCount >= 2){
-//                 res.render('people', context);
-//             }
-
-//         }
-//     });
-
-//     /*Display all people whose name starts with a given string. Requires web based javascript to delete users with AJAX */
-//     router.get('/search/:s', function(req, res){
-//         var callbackCount = 0;
-//         var context = {};
-//         context.jsscripts = ["deleteperson.js","filterpeople.js","searchpeople.js"];
-//         var mysql = req.app.get('mysql');
-//         getPeopleWithNameLike(req, res, mysql, context, complete);
-//         getPlanets(res, mysql, context, complete);
-//         function complete(){
-//             callbackCount++;
-//             if(callbackCount >= 2){
-//                 res.render('people', context);
-//             }
-//         }
-//     });
-
-//     /* Display one person for the specific purpose of updating people */
-
-//     router.get('/:id', function(req, res){
-//         callbackCount = 0;
-//         var context = {};
-//         context.jsscripts = ["selectedplanet.js", "updateperson.js"];
-//         var mysql = req.app.get('mysql');
-//         getPerson(res, mysql, context, req.params.id, complete);
-//         getPlanets(res, mysql, context, complete);
-//         function complete(){
-//             callbackCount++;
-//             if(callbackCount >= 2){
-//                 res.render('update-person', context);
-//             }
-
-//         }
-//     });
-
-//     /* Adds a person, redirects to the people page after adding */
-
-//     router.post('/', function(req, res){
-//         console.log(req.body.homeworld)
-//         console.log(req.body)
-//         var mysql = req.app.get('mysql');
-//         var sql = "INSERT INTO grows  (:new_fruit, :, homeworld, age) VALUES (?,?,?,?)";
-//         var inserts = [req.body.new_fruit, req.body.lname, req.body.native_input];
-//         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-//             if(error){
-//                 console.log(JSON.stringify(error))
-//                 res.write(JSON.stringify(error));
-//                 res.end();
-//             }else{
-//                 res.redirect('/island');
-//             }
-//         });
-//     });
-
-//     /* The URI that update data is sent to in order to update a person */
-
-//     router.put('/:id', function(req, res){
-//         var mysql = req.app.get('mysql');
-//         console.log(req.body)
-//         console.log(req.params.id)
-//         var sql = "UPDATE bsg_people SET fname=?, lname=?, homeworld=?, age=? WHERE character_id=?";
-//         var inserts = [req.body.fname, req.body.lname, req.body.homeworld, req.body.age, req.params.id];
-//         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-//             if(error){
-//                 console.log(error)
-//                 res.write(JSON.stringify(error));
-//                 res.end();
-//             }else{
-//                 res.status(200);
-//                 res.end();
-//             }
-//         });
-//     });
-
-//     /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
-
-//     router.delete('/:id', function(req, res){
-//         var mysql = req.app.get('mysql');
-//         var sql = "DELETE FROM bsg_people WHERE character_id = ?";
-//         var inserts = [req.params.id];
-//         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-//             if(error){
-//                 console.log(error)
-//                 res.write(JSON.stringify(error));
-//                 res.status(400);
-//                 res.end();
-//             }else{
-//                 res.status(202).end();
-//             }
-//         })
-//     })
-
-     return router;
-     }();
+//          var inserts = context.username;
+//          context.jsscripts = [];
+//          var mysql = req.app.get('mysql');
+//          getislandDetails(res, mysql, context, complete);
+//          getIslandFruits(res, mysql, context, complete);
+//          getFlowersIsland(res, mysql, context, complete);
+//          getislandVillagers(res, mysql, context, complete);
+//          getperson(res, mysql, context, complete);
+//          function complete(){
+//              callbackCount++;
+//              if(callbackCount >= 5){
+//                  res.render('islandDetails', context);
+//              }
+// }
+// });
+        return router;
+        }();
