@@ -30,7 +30,7 @@
 
     <h3> Add Favorite Villager </h3>
 <div class="hiddenVillager">
-<form id="add_favorite" action="/island" method="post">
+<form id="add_favorite" action="island/addVill/" method="post">
         Villager: <select name='fvillager'>
         {{#each fvillager}}
         <option value={{fvillager}}>{{name}}</option>
@@ -38,9 +38,9 @@
         </select>
         <br>
         </div>
-        <button type="button">Sumbit</button>
+        <input type="submit" value= "Submit">
         </div>
-
+        </form>
         </div>
          <div class = "subbox2">
             <div class = "Fruit_Flowers">
@@ -70,20 +70,22 @@
         </div>
 
 <div class="hiddenFruit">
-    <form id="addFruit" action="/island" method="post">
+    <form id="addFruit" action="/addFruit/" method="post">
         Fruit Name: <input type="text" name="ffruit_name"><br>
         Native: <input type="text" name="fnative"><br>
+        <input type="submit" value= "Submit">
         </div>
-        <button type="button">Submit</button>
+        
         </form>
         <br/>
 
         <div class="hiddenFlower">
-        <form id="addflower" action="/island" method="post">
+        <form id="addflower" action="/addFlower/" method="post">
         Flower Name: <input type="text" name="fflower_name"><br>
         Flower Color: <input type="text" name="fflower_color"><br>
+        <input type="submit" value= "Submit">
         </div>
-        <button type="button">Submit</button>
+        
         </form>
         <br/>
         </div>

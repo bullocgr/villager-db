@@ -1,7 +1,7 @@
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
-
+    var global_var = "";
 
     function getVillagers(res, mysql, context, complete){
         mysql.pool.query("SELECT name, image, personality, animal, id FROM villager", function(error, results, fields){
@@ -103,6 +103,7 @@ module.exports = function(){
         context = {};
         context.jsscripts = ["deleteIslandVillager.js", "deleteIslandfruit.js", "deleteIslandFlower.js"];
         var mysql = req.app.get('mysql');
+        global_var = req.params.id;
 
       //  getislandDetails(req, res, mysql, context, complete);
         getIslandFruits(req, res, mysql, context, complete);
@@ -121,7 +122,7 @@ module.exports = function(){
   router.delete('/dlV/:vid', function(req,res, next){
     var mysql = req.app.get('mysql');
     var sql = "DELETE FROM member WHERE vid = ? AND player_id = ?";
-    var inserts = [req.params.vid, req.params.id];
+    var inserts = [req.params.vid, global_var];
     console.log(inserts);
     sql = mysql.pool.query(sql, inserts, function(error, results, fields){
       if (error){
@@ -132,12 +133,12 @@ module.exports = function(){
         res.status(202).end();
       }
     })
-  })
+  });
 
     router.delete('/dlFL/:flid', function(req,res, next){
     var mysql = req.app.get('mysql');
     var sql = "DELETE FROM has WHERE flower_id = ? AND player_id = ?";
-    var inserts = [req.params.flid, req.params.id];
+    var inserts = [req.params.flid, global_var];
     console.log(inserts);
     sql = mysql.pool.query(sql, inserts, function(error, results, fields){
       if (error){
@@ -148,12 +149,12 @@ module.exports = function(){
         res.status(202).end();
       }
     })
-  })
+  });
 
     router.delete('/dlFR/:frid', function(req,res, next){
     var mysql = req.app.get('mysql');
     var sql = "DELETE FROM grows WHERE fruit_id = ? AND player_id = ?";
-    var inserts = [req.params.frid, req.params.id];
+    var inserts = [req.params.frid, global_var];
     console.log(inserts);
     sql = mysql.pool.query(sql, inserts, function(error, results, fields){
       if (error){
@@ -164,27 +165,79 @@ module.exports = function(){
         res.status(202).end();
       }
     })
-  })
+  });
 
-    router.post('/Addvill/', function(req, res){
+
+
+    // router.post('/Addvill/', function(req, res){
+    //     var mysql = req.app.get('mysql');
+    //     var sql = "INSERT INTO member (image, name, personality, animal) VALUES (?,?,?,?)";
+    //     var inserts = [req.body.fimage, req.body.fname, req.body.fpersonality, req.body.fanimal];
+    //     console.log(inserts);
+    //     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+    //         if(error){
+    //             console.log(JSON.stringify(error))
+    //             res.write(JSON.stringify(error));
+    //             res.end();
+    //         }else{
+    //            callback(null, rows[0].id_user);
+    //         }
+    //     });
+    // });
+
+    function getPlayerDetails(inserts, mysql, callback){
+      var query = "SELECT id AS flower_id FROM flower WHERE name = ? AND color = ?";
+      mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            else{
+                callback(null, rows[0].flower_id);
+        }
+               
+            
+        });
+    }
+
+
+
+
+
+        router.post('island/addFlower', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO member (image, name, personality, animal) VALUES (?,?,?,?)";
-        var inserts = [req.body.fimage, req.body.fname, req.body.fpersonality, req.body.fanimal];
+        var sql = "INSERT INTO has (flower_id, player_id) VALUES (?,?)";
+        var inserts = [req.body.fflower_name, req.body.fflower_color];
         console.log(inserts);
+        var flid;
+
+        getPlayerDetails(inserts, mysql, function(err, content) {
+    if (err) {
+        console.log(err);
+        
+    } else {
+        flid = content;
+         var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO has (flower_id, player_id) VALUES (?,?)";
+        inserts = [flid, player_id];
+         console.log(inserts);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
-                console.log(JSON.stringify(error))
-                res.write(JSON.stringify(error));
                 res.end();
             }else{
                 res.redirect('/island/' + req.params.id);
             }
-        });
+
     });
-        router.post('/Addflow/', function(req, res){
+}
+});
+});
+
+
+        router.post('/addFruit/', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO has (flower_name, player_id) VALUES (?,?)";
-        var inserts = [req.body.fl, req.body];
+        var sql = "INSERT INTO has (fruit_name, native) VALUES (?,?)";
+        var inserts = [req.body.ffruit_name, req.body.fnative];
         console.log(inserts);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
