@@ -1,6 +1,7 @@
 var path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
+var bodyParser = require('body-parser')
 
 var bodyParser = require('body-parser');
 var app = express();
@@ -12,6 +13,7 @@ var port = 3002;
 
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'handlebars');
 app.set('mysql', mysql);
 app.use(express.static('./public'));
@@ -20,9 +22,11 @@ app.get('/', function(req, res) {
     res.render('homepage')
 });
 
-app.get('/island', function(req, res) {
-    res.render('island')
-});
+
+app.use('/island', require('./serverside JS/island.js'));
+//app.get('/island', function(req, res) {
+//    res.render('island')
+//});
 
 app.use('/fruitFlowers', require('./serverside JS/fruitFlowers.js'));
 //app.get('/fruitFlowers', function(req, res) {
@@ -55,7 +59,12 @@ app.use(function(req,res){
 });
 
 
+
 // app.use('/island', express.static(__dirname + 'island' ));
+
+
+
+//app.use('/island', express.static(__dirname + 'island' ));
 
 app.listen(port, function (err) {
   if (err) {
