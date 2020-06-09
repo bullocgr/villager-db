@@ -1,6 +1,6 @@
 <meta name="Villagers">
 <link rel="stylesheet" href="/css/villagers.css">
-<script src="villagers.js" charset="utf-8" defer></script>
+
 
 
 <body>
@@ -12,7 +12,8 @@
                 {{> villagercard }}
 
     <div id="hidden">
-        <form id="addVillagers" action="/villagers" method="post">
+        <form id="addVillagers" action="villagers/Addvill" method="post">
+
         Link an Image!: <input type="text" name="fimage" id="villagerImage"><br>
         Villager Name: <input type="text" name="fname" id="villagerName"><br>
         Villager Personality: <input type="text" name="fpersonality" id="villagerPersonality"><br>
