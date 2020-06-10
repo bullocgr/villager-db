@@ -1,4 +1,9 @@
 	/*styles nav bar*/
+.hiddenVill{
+display: none;
+}
+
+
 .topnav {
     background-color: rgb(143, 109, 51);
     overflow: hidden;

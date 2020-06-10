@@ -6,7 +6,11 @@
                     <li>Name:{{name}}</li>
                     <li>Personality: {{personality}}</li>
                     <li>Species: {{animal}}</li>
-                                <div class="hiddenVill">
+
+                        <td><input type="button" value="Update Villager" onclick="toggleVillager({{name}})"></td>
+           
+                                <div id='{{name}}' class="hiddenVill">
+
 
              <form id="updateVills" action="updateVills/" method="post">
              Villager Name: <input type="text" name="ffvillager" value = {{name}} readonly="readonly"><br>
@@ -16,6 +20,7 @@
 
         <input type="submit" value= "Submit">
         </form>
+        </div>
         </div>
                 </ul>
                 <div style="clear:both"></div>
