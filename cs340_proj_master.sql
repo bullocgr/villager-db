@@ -1,10 +1,12 @@
 
 CREATE TABLE `island` (
+`player_id` int(11) NOT NULL,
 `name` VARCHAR(255) NOT NULL,
 `location` VARCHAR(255) NOT NULL,
 `start_date` date,
 PRIMARY KEY (`name`),
-UNIQUE(`name`)
+UNIQUE(`name`),
+CONSTRAINT `island_fk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -13,8 +15,6 @@ CREATE TABLE `player` (
 `player_name` VARCHAR(255) NOT NULL,
 `username` VARCHAR(255) NOT NULL,
 `password` VARCHAR(255) NOT NULL,
-`island_name` VARCHAR(255) NOT NULL,
-CONSTRAINT `ownership_fk_1` FOREIGN KEY (`island_name`) REFERENCES `island` (`name`),
 PRIMARY KEY (`id`),
 UNIQUE(`id`),
 UNIQUE(`password`)
@@ -77,47 +77,47 @@ CONSTRAINT `member_fk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
 
 
 
-INSERT INTO island VALUES (null, "=^.^=", "North", 2020-03-20);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "gswizzle"), "=^.^=", "North", 2020-03-20);
 
-INSERT INTO island VALUES (null, "my island", "South", 2020-03-25);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "soccersoren"), "my island", "South", 2020-03-25);
 
-INSERT INTO island VALUES (null, "pen island", "South", 2020-03-30);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "gabiv"), "pen island", "South", 2020-03-30);
 
-INSERT INTO island VALUES (null, "ooboon", "South", 2020-04-20);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "bbr"), "ooboon", "South", 2020-04-20);
 
-INSERT INTO island VALUES (null, "beaver", "North", 2020-04-01);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "Alex1"), "beaver", "North", 2020-04-01);
 
-INSERT INTO island VALUES (null, "kanto", "North", 2020-05-06);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "Ickabon"), "kanto", "North", 2020-05-06);
 
-INSERT INTO island VALUES (null, "han", "South", 2020-04-10);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "Will1"), "han", "South", 2020-04-10);
 
-INSERT INTO island VALUES (null, "i started late", "South", 2020-03-21);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "matt"), "i started late", "South", 2020-03-21);
 
-INSERT INTO island VALUES (null, "terraria", "North", 2020-03-22);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "boi"), "terraria", "North", 2020-03-22);
 
-INSERT INTO island VALUES (null, "noice", "North", 2020-03-22);
+INSERT INTO island VALUES ((SELECT id FROM player WHERE username = "kkslider"), "noice", "North", 2020-03-22);
 
 ​
 
-INSERT INTO player VALUES (1, "Grace", "gswizzle", "SuperPassword", (SELECT name FROM island WHERE name = "=^.^="));
+INSERT INTO player VALUES (1, "Grace", "gswizzle", "SuperPassword");
 
-INSERT INTO player VALUES (null, "Soren", "soccersoren", "Password", (SELECT name FROM island WHERE name = "my island"));
+INSERT INTO player VALUES (null, "Soren", "soccersoren", "Password");
 
-INSERT INTO player VALUES (null, "Gabi", "gabiv", "NotPassword", (SELECT name FROM island WHERE name = "pen island"));
+INSERT INTO player VALUES (null, "Gabi", "gabiv", "NotPassword");
 
-INSERT INTO player VALUES (null, "Reed", "bbr", "PPassword", (SELECT name FROM island WHERE name = "ooboon"));
+INSERT INTO player VALUES (null, "Reed", "bbr", "PPassword");
 
-INSERT INTO player VALUES (null, "Alex", "Alex1", "Password123", (SELECT name FROM island WHERE name = "beaver"));
+INSERT INTO player VALUES (null, "Alex", "Alex1", "Password123");
 
-INSERT INTO player VALUES (null, "Eric", "Ickabon", "Password456", (SELECT name FROM island WHERE name = "kanto"));
+INSERT INTO player VALUES (null, "Eric", "Ickabon", "Password456");
 
-INSERT INTO player VALUES (null, "Will", "Will1", "Password789", (SELECT name FROM island WHERE name = "han"));
+INSERT INTO player VALUES (null, "Will", "Will1", "Password789");
 
-INSERT INTO player VALUES (null, "Matthew", "matt", "PasswordRemeber", (SELECT name FROM island WHERE name = "i started late"));
+INSERT INTO player VALUES (null, "Matthew", "matt", "PasswordRemeber");
 
-INSERT INTO player VALUES (null, "Boy", "boi", "PasswordPls", (SELECT name FROM island WHERE name = "terraria"));
+INSERT INTO player VALUES (null, "Boy", "boi", "PasswordPls");
 
-INSERT INTO player VALUES (null, "Karson", "kkslider", "Passwor", (SELECT name FROM island WHERE name = "noice"));
+INSERT INTO player VALUES (null, "Karson", "kkslider", "Passwor");
 
 ​
 

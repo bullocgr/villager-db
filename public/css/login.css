@@ -1,52 +1,55 @@
-	
 input[type=text], input[type=text] {
-  width: 75%;
+  width: 60%;
   padding: 12px 40px;
-  margin: 8px;
+  margin: 8px 10px ;
   display: inline-block;
-  border-bottom: 1px solid #ccc;
+  border-bottom: -10px solid #ccc;
   box-sizing: border-box;
   text-align: left;
   
-  
 }
+
 label {
+  display: inline-block;
+  position: fixed;
   float: left;
+  text-align: right;
   position: relative;
   top: 20px;
-  padding-left: 20px;
+  padding-left: 50px;
+
 }
 .box{
-    background-color:#D3D3D3;
-     padding-top: 150px;
-     /* change width back to 500px when issue is fixed*/
-    width: 500px;
-    height: 400px;
-    top: 60%;
-    left: 50%;
-    position: absolute;
-    margin-top: -200px;
-    margin-left: -250px;
-    text-align: center;
-	  border: 3px solid black;
-  	overflow: auto;
- 	  position: absolute;
+  background-color:#D3D3D3;
+  padding-top: 150px;
+   /* change width back to 500px when issue is fixed*/
+  width: 500px;
+  height: 350px;
+  top: 60%;
+  left: 50%;
+  position: absolute;
+  margin-top: -200px;
+  margin-left: -250px;
+  text-align: center;
+	border: 3px solid black;
+  overflow: auto;
+  position: absolute;
+   
 }
 
 #login_header{
-    background-color: #D3D3D3;
-  	top: 60%;
-    left: 50%;
-    font-size: 26px;
-    width: 300px;
-    height: 130px;
-    margin-top: -380px;
-    margin-left: -147px;
-    position: absolute;
-    text-align: center;
-	  border: 3px solid black;
-  	overflow: auto;
-  	position: absolute;
+  background-color: #D3D3D3;
+  top: 60%;
+  left: 50%;
+  font-size: 26px;
+  width: 300px;
+  height: 130px;
+  margin-top: -380px;
+  margin-left: -147px;
+  position: absolute;
+  text-align: center;
+	border: 3px solid black;
+  position: absolute;
 }
 input[type=submit]{
 	background-color: #D3D3D3;
@@ -59,3 +62,67 @@ input[type=submit]{
   font-size: 40px;
   
 }
+
+
+button{
+  border: none;
+  color:black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  bottom: 10%;
+  left: 63%;
+  position: absolute;
+  margin-top: -200px;
+  margin-left: -250px;
+  text-align: center;
+	border: 3px solid black;
+ 	position: absolute;
+
+}
+
+
+.modal{
+  display: none; /* Hidden by default */
+
+
+}
+
+#hidden{
+  display: none;
+  position: fixed; 
+  z-index: 1; 
+  left:300;
+  width: 50%;
+  height: 93%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: #ccc;
+  float: right;
+  position: relative;
+  top: 1px;
+  padding-left: 250px;
+  float: left;
+  text-align: right;
+  position: relative;
+  padding-left: 20px;
+  border: 1px solid #888;
+ 
+
+
+}
+
+
+
+#addIsland input{ 
+  position: relative;
+  left: 10;
+  text-align: center;
+  display: inline-block
+  
+ 
+}
+
+
