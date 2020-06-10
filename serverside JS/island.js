@@ -3,7 +3,7 @@ module.exports = function(){
     var router = express.Router();
     var global_var = "";
 
-
+ 
     function getVillagers(res, mysql, context, complete){
         mysql.pool.query("SELECT name,id FROM villager", function(error, results, fields){
             if(error){
