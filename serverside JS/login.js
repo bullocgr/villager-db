@@ -32,7 +32,7 @@ module.exports = function(){
                 if(error){
                     res.end();
                 }else{
-                    res.redirect('/login/' + req.params.id);
+                    
                 }
 
     });
@@ -89,7 +89,11 @@ module.exports = function(){
     }
       
 
-
+    router.post('/', function(req, res){
+    var mysql = req.app.get('mysql');
+    var context = {};
+    getAccount(req, res, mysql, context);
+    });
 
 
 
