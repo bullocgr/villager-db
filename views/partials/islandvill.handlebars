@@ -1,11 +1,10 @@
        <table>
        {{#each villager}} 
         <tr> 
-            <td>{{villager_name}}</td>
-            <td><img src="{{image}}" alt="{{name}} picture"></td> 
-            <td>{{join_date}}</td>
+            <td>{{name}}</td>
             <td>{{rating}}</td>
             <td>{{favorite}}</td>>
+            <td>{{join_date}}</td>
 			<td><input type="button" value="Delete Row" onclick="deleteIslandVillager({{vid}})"></td>
 
         </tr> 

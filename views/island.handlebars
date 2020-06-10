@@ -18,9 +18,9 @@
             <p>Villager List</p>
             <thead> 
         <th>Villagers</th> 
-        <th>Image</th>
         <th>Personality</th> 
         <th>Animal</th>
+        <th>Join Date</th>
             </thead> 
             <tbody>
         {{> islandvill}}
@@ -30,12 +30,13 @@
 
     <h3> Add Favorite Villager </h3>
 <div class="hiddenVillager">
-<form id="add_favorite" action="island/addVill/" method="post">
+<form id="add_favorite" action="addVill/" method="post">
         Villager: <select name='fvillager'>
         {{#each fvillager}}
-        <option value={{fvillager}}>{{name}}</option>
+        <option value={{id}}>{{name}}</option>
         {{/each}}
         </select>
+         Favorite: <input type="text" name="ffavorite"><br>
         <br>
         </div>
         <input type="submit" value= "Submit">
@@ -70,7 +71,7 @@
         </div>
 
 <div class="hiddenFruit">
-    <form id="addFruit" action="/addFruit/" method="post">
+    <form id="addFruit" action="addFruit/" method="post">
         Fruit Name: <input type="text" name="ffruit_name"><br>
         Native: <input type="text" name="fnative"><br>
         <input type="submit" value= "Submit">
@@ -80,7 +81,7 @@
         <br/>
 
         <div class="hiddenFlower">
-        <form id="addflower" action="/addFlower/" method="post">
+        <form id="addflower" action="addFlower/" method="post">
         Flower Name: <input type="text" name="fflower_name"><br>
         Flower Color: <input type="text" name="fflower_color"><br>
         <input type="submit" value= "Submit">
