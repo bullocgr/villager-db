@@ -287,7 +287,7 @@ function getVillagerID(inserts, mysql, callback)
 
         router.post('/addVill', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO member (villager_name, player_id , vid, favorite, join_date) VALUES (?,?,?,?,?)";
+        var sql = "INSERT INTO member (villager_name, player_id , vid, favorite, rating, join_date) VALUES (?,?,?,?,?, ?)";
         var inserts = [req.body.fvillager];
         var date = Date();
         console.log(inserts);
@@ -299,7 +299,7 @@ function getVillagerID(inserts, mysql, callback)
                 res.end();        
         } else {            
             // code to execute on data retrieval
-            inserts = [data, global_var, req.body.fvillager, req.body.ffavorite, date];
+            inserts = [data, global_var, req.body.fvillager, req.body.ffavorite, req.body.frating, date];
     sql = mysql.pool.query(sql, inserts, function(error, results, fields){
       if (error){
         res.write(JSON.stringify(error));
@@ -314,6 +314,29 @@ function getVillagerID(inserts, mysql, callback)
 
 });
     });
+
+
+        router.post('/updateVill', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE member SET favorite = ?, rating = ? WHERE villager_name = ? AND player_id = ?";
+
+       
+            // code to execute on data retrieval
+            inserts = [req.body.ffavoriteVill, req.body.fratingVill, req.body.ffvillager, global_var];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.redirect('/island/' + global_var);
+      }
+    })
+
+          
+
+});
+  
 
         return router;
         }();

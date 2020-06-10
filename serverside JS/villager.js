@@ -16,6 +16,26 @@ module.exports = function(){
     }
     
 
+        router.post('/updateVills', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE villager SET personality = ?, animal = ?, image = ? WHERE villager_name = ?";
+
+       console.log("got ehre")
+            // code to execute on data retrieval
+            inserts = [req.body.fpersonality, req.body.fanimal, req.body.fimageVill, req.body.ffvillager];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.redirect('/villagers');
+      }
+    })
+
+          
+
+});
         // router.post('/api/villagers/:name', (req, res) => {
         //     con.query(`DELETE FROM villager WHERE name = ?;`, name, function (err, result) { 
         //         if (err) throw err;
@@ -72,6 +92,8 @@ module.exports = function(){
 
 
     });
+
+
 
     router.post('/', function(req, res) {
       console.log("in post!")
