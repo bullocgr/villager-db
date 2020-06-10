@@ -229,8 +229,7 @@ function getVillagerID(inserts, mysql, callback)
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO has (flower_id, player_id) VALUES (?,?)";
         var inserts = [req.body.fflower_color, req.body.fflower_name];
-        console.log(inserts);
-
+        
         getflowerID(inserts, mysql, function(err,data){
         if (err) {
                 console.log(JSON.stringify(error))

@@ -77,7 +77,7 @@ module.exports = function(){
       var callbackCount = 0;
       var context = {};
 
-      context.jsscripts = ["deleteVillager.js"];
+      context.jsscripts = ["deleteVillager.js", "villagers.js"];
 
       var mysql = req.app.get('mysql');
       getVillagers(res, mysql, context, complete);

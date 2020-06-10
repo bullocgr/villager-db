@@ -5,9 +5,9 @@
             <td>{{rating}}</td>
             <td>{{favorite}}</td>>
             <td>{{join_date}}</td>
-            <td><input type="button" value="Update Villager" onclick="updateIslandVillager({{vid}})"></td>
+            <td><input type="button" value="Update Villager" onclick="toggleVillager({{name}})"></td>
            
-            <div class="hiddenVill">
+            <div id='{{name}}' class="hiddenVill">
 
              <form id="updateVill" action="updateVill/" method="post">
              Villager Name: <input type="text" name="ffvillager" value = {{name}} readonly="readonly"><br>

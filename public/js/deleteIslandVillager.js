@@ -7,3 +7,13 @@ function deleteIslandVillager(vid){
         }
     })
 }
+
+function toggleVillager(name){
+	// var modal = document.getElementById(name).querySelector("hiddenVills");
+  //  console.log(modal);	
+    if (name.style.display === "none") {
+        name.style.display = "block";
+    } else {
+        name.style.display = "none";
+      }
+}
