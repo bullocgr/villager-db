@@ -245,7 +245,7 @@ function getVillagerID(inserts, mysql, callback)
         res.status(404);
         res.end();
       }else{
-        res.redirect('/island/' + results[0].id);
+        res.redirect('/island/' + global_var);
       }
     })
 
