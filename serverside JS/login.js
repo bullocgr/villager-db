@@ -6,8 +6,7 @@ module.exports = function(){
 
     function getAccount(req, res, mysql, context){
       var query = "SELECT id, username FROM player WHERE password = ? AND username = ?";
-      var inserts = [req.body.fpassword, req.body.fusername];
-      console.log(inserts);
+      var inserts = [req.body.fpassword, req.body.fusername]
       mysql.pool.query(query, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -20,8 +19,6 @@ module.exports = function(){
           id: results[0].id,
           
         }
-          console.log(accountSuccess);
-          console.log("got here2");
           res.redirect('/island/' + results[0].id);
 
              
