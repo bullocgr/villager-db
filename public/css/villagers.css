@@ -1,4 +1,8 @@
 
+#updateVills{
+
+}
+
 .hiddenVill{
 display: none;
 }
@@ -58,7 +62,15 @@ input[type=submit]{
 
   
 }
+.Forms{
+    margin-top:80px;
+    height:200px;
+    width:auto;
+    position: relative;
 
+
+
+}
   
 .content {
     margin-top: 50px;
@@ -99,6 +111,7 @@ body {
     padding:0;
     text-align:center;
     background-color: #96f5f5;
+    margin: 0;
 }
 
 .Villager-Header {
