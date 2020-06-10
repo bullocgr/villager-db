@@ -20,7 +20,6 @@
 	<div class = "box">
 	 {{!<label for="fusername" ><b>User ID  </b></label>
     <input type="user" placeholder="" id="userID" name="fusername" required>
-
     <label for="fpassword" ><b>Password</b></label>
     <input type="password" placeholder="" id="password" name="fpassword" required>
         
@@ -33,28 +32,23 @@
         <br/>
 	</div>
 
-        <div id="hidden">
-        
+
+ <div id="modal" >
+    <div id="hidden" >
         <form id ="addAccount" action="login/AddAccount" method="post">
-        Your name: <input type="text" name="fyourname" id="yourName"><br>
-        Username: <input type="text" name="fusername" id="username"><br>
-        Password: <input type="text" name="fpassword" id="password"><br>
-                <!-- <input type="submit" value= "Submit"> -->
+        <label><b>Your name:</b></label> <input type="text" name="fyourname" id="yourName"><br>
+        <label><b>Username:</b></label><input type="text" name="fusername" id="username"><br>
+        <label><b>Password:</b></label><input type="text" name="fpassword" id="password"><br>
 
-        <!-- </form> -->
-
-
-       <!-- <form id="addIsland" action="login/AddIsland" method="post"> -->
-        Island Name: <input type="text" name="fislandName" id="islandName"><br>
-        Location: <input type="text" name="flocation" id="location"><br>
-        Start Date: <input type="text" name="fstartDate" id="startDate"><br>
+        <label><b>Island Name:</b></label> <input type="text" name="fislandName" id="islandName"><br>
+        <label><b>Location:</b></label> <input type="text" name="flocation" id="location"><br>
+        <label><b>Start Date:</b></label> <input type="text" name="fstartDate" id="startDate"><br>
         <input type="submit" value= "Submit">
-                </form>
-
     </div>
-        <button type = "button" onclick="toggleAccountCreation()">Double click to create an account </button>
+  </div>
+
+        <button type = "button" onclick="toggleAccountCreation()">Add Villager </button>
+        </form>
         <br/>
 </body>
-
-
 

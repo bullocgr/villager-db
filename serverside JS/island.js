@@ -3,21 +3,9 @@ module.exports = function(){
     var router = express.Router();
     var global_var = "";
 
-
+ 
     function getVillagers(res, mysql, context, complete){
-        mysql.pool.query("SELECT name, image, personality, animal, id FROM villager", function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-                return router;
-            }
-            context.villager  = results;
-            complete();
-        });
-    }
-
-    function getislandDetails(res, mysql, context, complete){
-        mysql.pool.query("SELECT island.name , island.location, island.start_date FROM island", function(error, results, fields){
+        mysql.pool.query("SELECT name,id FROM villager", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -27,6 +15,7 @@ module.exports = function(){
             complete();
         });
     }
+
 
     function getPlayerDetails(req, res, mysql, context, complete){
       var query = "SELECT island_name AS islandname FROM player WHERE id = ?";
@@ -40,19 +29,6 @@ module.exports = function(){
             complete();
         });
     }
-
-    function getislandDetails(req, res, mysql, context, complete){
-        var query = "SELECT island.location, island.start_date FROM island WHERE island_name = ?";
-      var inserts = [req.params.id]
-      mysql.pool.query(query, inserts, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.islandDetails = results;
-            complete();
-        });
-}
 
     function getIslandFruits(req, res, mysql, context, complete){
       var query = "SELECT fruit.name AS fruit_name, fruit.price AS price, fruit.id as fruit_id FROM fruit INNER JOIN grows ON grows.player_id = ? AND grows.fruit_id = fruit.id";
@@ -84,7 +60,7 @@ module.exports = function(){
     }
 
     function getislandVillagers(req, res, mysql, context, complete){
-     var query = "SELECT villager_name AS name, rating, favorite, vid FROM member WHERE player_id = ?"
+     var query = "SELECT villager_name AS name, join_date, rating, favorite, vid FROM member WHERE player_id = ?"
       var inserts = [req.params.id];
 
       mysql.pool.query(query, inserts, function(error, results, fields){
@@ -97,22 +73,6 @@ module.exports = function(){
         });
     }
 
-
-    function getIslandName(req, res, mysql, context, complete){
-        var query = "SELECT island_name FROM player WHERE id = ?";
-        
-        var inserts = [req.params.id];
-         mysql.pool.query(query, inserts, function(error, results, fields){
-            if(error){
-
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-
-            return results[0].island_name;
-            complete();
-        });
-    }
 
 
       router.get('/:id', function(req, res){
@@ -136,7 +96,8 @@ module.exports = function(){
 
              }
 }
-});
+
+            });
 
   router.delete('/dlV/:vid', function(req,res, next){
     var mysql = req.app.get('mysql');
@@ -186,6 +147,47 @@ module.exports = function(){
     })
   });
 
+function getflowerID(inserts, mysql, callback)
+
+{
+    mysql.pool.query('SELECT id FROM flower WHERE color = ? AND name = ?', inserts, function(err, result)
+    {
+        if (err) 
+            callback(err,null);
+        else
+            callback(null,result[0].id);
+
+    });
+
+}
+
+function getFruitID(inserts, mysql, callback)
+
+{
+    mysql.pool.query('SELECT id AS fruit_id FROM fruit WHERE name = ? ', inserts, function(err, result)
+    {
+        if (err) 
+            callback(err,null);
+        else
+            callback(null, result[0].fruit_id);
+
+    });
+
+}
+
+function getVillagerID(inserts, mysql, callback)
+
+{
+    mysql.pool.query('SELECT name AS name FROM villager WHERE id = ? ', inserts, function(err, result)
+    {
+        if (err) 
+            callback(err,null);
+        else
+            callback(null, result[0].name);
+
+    });
+
+}
 
 
     // router.post('/Addvill/', function(req, res){
@@ -223,71 +225,119 @@ module.exports = function(){
 
 
 
-        router.post('island/addFlower', function(req, res){
+        router.post('/addFlower', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO has (flower_id, player_id) VALUES (?,?)";
-        var inserts = [req.body.fflower_name, req.body.fflower_color];
+        var inserts = [req.body.fflower_color, req.body.fflower_name];
         console.log(inserts);
-        var flid;
 
-        getPlayerDetails(inserts, mysql, function(err, content) {
-    if (err) {
-        console.log(err);
-        
-    } else {
-        flid = content;
-         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO has (flower_id, player_id) VALUES (?,?)";
-        inserts = [flid, player_id];
-         console.log(inserts);
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.end();
-            }else{
-                res.redirect('/island/' + req.params.id);
-            }
-
-    });
-}
-});
-});
-
-
-        router.post('/addFruit/', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO has (fruit_name, native) VALUES (?,?)";
-        var inserts = [req.body.ffruit_name, req.body.fnative];
-        console.log(inserts);
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
+        getflowerID(inserts, mysql, function(err,data){
+        if (err) {
                 console.log(JSON.stringify(error))
                 res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/island/' + req.params.id);
-            }
-        });
+                res.end();        
+        } else {            
+            // code to execute on data retrieval
+            inserts = [data, global_var];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.redirect('/island/' + global_var);
+      }
+    })
+
+        }    
+
+});
     });
 
-//     /*Display all people. Requires web based javascript to delete users with AJAX*/
-//       router.get('/', function(req, res){
-//         console.log("got here");
-//         var callbackCount = 0;
-//          var inserts = context.username;
-//          context.jsscripts = [];
-//          var mysql = req.app.get('mysql');
-//          getislandDetails(res, mysql, context, complete);
-//          getIslandFruits(res, mysql, context, complete);
-//          getFlowersIsland(res, mysql, context, complete);
-//          getislandVillagers(res, mysql, context, complete);
-//          getperson(res, mysql, context, complete);
-//          function complete(){
-//              callbackCount++;
-//              if(callbackCount >= 5){
-//                  res.render('islandDetails', context);
-//              }
-// }
-// });
+
+
+        router.post('/addFruit', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO grows (native, player_id , fruit_id) VALUES (?,?,?)";
+        var inserts = [req.body.ffruit_name];
+        console.log(inserts);
+
+        getFruitID(inserts, mysql, function(err,data){
+        if (err) {
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();        
+        } else {            
+            // code to execute on data retrieval
+            inserts = [req.body.fnative, global_var, data];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.redirect('/island/' + global_var);
+      }
+    })
+
+        }    
+
+});
+    });
+
+        router.post('/addVill', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO member (villager_name, player_id , vid, favorite, rating, join_date) VALUES (?,?,?,?,?, ?)";
+        var inserts = [req.body.fvillager];
+        var date = Date();
+        console.log(inserts);
+
+        getVillagerID(inserts, mysql, function(err,data){
+        if (err) {
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();        
+        } else {            
+            // code to execute on data retrieval
+            inserts = [data, global_var, req.body.fvillager, req.body.ffavorite, req.body.frating, date];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.redirect('/island/' + global_var);
+      }
+    })
+
+        }    
+
+});
+    });
+
+
+        router.post('/updateVill', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE member SET favorite = ?, rating = ? WHERE villager_name = ? AND player_id = ?";
+
+       
+            // code to execute on data retrieval
+            inserts = [req.body.ffavoriteVill, req.body.fratingVill, req.body.ffvillager, global_var];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+      if (error){
+        res.write(JSON.stringify(error));
+        res.status(404);
+        res.end();
+      }else{
+        res.redirect('/island/' + global_var);
+      }
+    })
+
+          
+
+});
+  
+
         return router;
         }();
 
