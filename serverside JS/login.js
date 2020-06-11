@@ -81,7 +81,7 @@ module.exports = function(){
             }
             else{
                      res.write(JSON.stringify(error));
-                     res.end();
+                     res.redirect('/login');
             }
 
         });

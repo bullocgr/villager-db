@@ -3,51 +3,51 @@
 <script src="login.js" charset="utf-8" defer></script>
 
        {{! <form id="addUser" action="/login" method="post">
-        Username: <input type="text" name="fusername"><br>
-        Password: <input type="text" name="fpassword"><br>
+        Username: <input type="text" name="fusername"  placeholder="Enter a Username"><br>
+        Password: <input type="text" name="fpassword"  placeholder="Enter a Password"><br>
         <input type="submit" value="Submit">
         </form>
         <br/>}}
 
 
 <header>
-	<div id = "login_header">
-		<h1>Log in</h1>
-	</div>
+    <div id = "login_header">
+        <h1>Log in</h1>
+    </div>
 </header>
 
 <body>
-	<div class = "box">
-	 {{!<label for="fusername" ><b>User ID  </b></label>
+    <div class = "box">
+     {{!<label for="fusername" ><b>User ID  </b></label>
     <input type="user" placeholder="" id="userID" name="fusername" required>
     <label for="fpassword" ><b>Password</b></label>
     <input type="password" placeholder="" id="password" name="fpassword" required>
         
     <button type="enter" onclick="userLogin()">ENTER</button>--}}
        <form id="addUser" action="/login" method="post">
-        <label><b>Username:</b></label> <input type="text" name="fusername"><br>
-        <label><b>Password:</b></label> <input type="text" name="fpassword"><br>
+        <label><b>Username:</b></label> <input type="text" name="fusername"  placeholder="Enter A Username"><br>
+        <label><b>Password:</b></label> <input type="text" name="fpassword"  placeholder="Enter A Password"><br>
         <input type="submit" value="Submit">
         </form>
         <br/>
-	</div>
+    </div>
 
 
  <div id="modal" >
     <div id="hidden" >
         <form id ="addAccount" action="login/AddAccount" method="post">
         <label><b>Your name:</b></label> <input type="text" name="fyourname" id="yourName"><br>
-        <label><b>Username:</b></label><input type="text" name="fusername" id="username"><br>
-        <label><b>Password:</b></label><input type="text" name="fpassword" id="password"><br>
+        <label><b>Username:</b></label><input type="text" name="fusername" id="username"  placeholder="Enter a Username"><br>
+        <label><b>Password:</b></label><input type="text" name="fpassword" id="password"  placeholder="Enter a Password"><br>
 
-        <label><b>Island Name:</b></label> <input type="text" name="fislandName" id="islandName"><br>
-        <label><b>Location:</b></label> <input type="text" name="flocation" id="location"><br>
-        <label><b>Start Date:</b></label> <input type="text" name="fstartDate" id="startDate"><br>
+        <label><b>Island Name:</b></label> <input type="text" name="fislandName" id="islandName  placeholder="Enter an Island Name"><br>
+        <label><b>Location:</b></label> <input type="text" name="flocation" id="location"  placeholder="Enter a Location (North or South)"><br>
+        <label><b>Start Date:</b></label> <input type="text" name="fstartDate" id="startDate"  placeholder="Enter a Start date"><br>
         <input type="submit" value= "Submit">
     </div>
   </div>
 
-        <button type = "button" onclick="toggleAccountCreation()">Add Villager </button>
+        <button type = "button" onclick="toggleAccountCreation()">CREATE ACCOUNT</button>
         </form>
         <br/>
 </body>

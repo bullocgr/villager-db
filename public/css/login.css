@@ -1,11 +1,11 @@
 input[type=text], input[type=text] {
-  width: 60%;
+  width: 65%;
   padding: 12px 40px;
   margin: 8px 10px ;
   display: inline-block;
   border-bottom: -10px solid #ccc;
   box-sizing: border-box;
-  text-align: left;
+  text-align: right;
   
 }
 
@@ -31,7 +31,7 @@ label {
   margin-top: -200px;
   margin-left: -250px;
   text-align: center;
-	border: 3px solid black;
+  border: 3px solid black;
   overflow: auto;
   position: absolute;
    
@@ -48,11 +48,11 @@ label {
   margin-left: -147px;
   position: absolute;
   text-align: center;
-	border: 3px solid black;
+  border: 3px solid black;
   position: absolute;
 }
 input[type=submit]{
-	background-color: #D3D3D3;
+  background-color: #D3D3D3;
   border: none;
   padding: 15px 32px;
   text-align: center;
@@ -73,13 +73,13 @@ button{
   display: inline-block;
   font-size: 16px;
   bottom: 10%;
-  left: 63%;
+  left: 60%;
   position: absolute;
   margin-top: -200px;
   margin-left: -250px;
   text-align: center;
-	border: 3px solid black;
- 	position: absolute;
+  border: 3px solid black;
+  position: absolute;
 
 }
 
