@@ -7,21 +7,21 @@
                     <li>Personality: {{personality}}</li>
                     <li>Species: {{animal}}</li>
 
-                        <td><input type="button" class="    " value="Update Villager" onclick="toggleVillager({{name}})"></td>
+                        <td><input type="button"  value="Update Villager" onclick="toggleVillager({{name}})"></td>
 
                 </ul>
                 <div style="clear:both"></div>
             </div>
-                       
+
                                 <div id='{{name}}' class="hiddenVill">
                             <div class ="Forms">
 
              <form id="updateVills" action="updateVills/" method="post">
-             Villager Name: <input type="text" name="ffvillager" value = {{name}} readonly="readonly"><br>
-             New Image: <input type="text" name="fimageVill" value = "Enter a Link to an image!"><br>
-        New Personality: <input type="text" name="fpersonality" value = {{personality}}><br>
-        New Species: <input type="text" name="fanimal" value = {{animal}}><br>
 
+             <label> Villager Name: </label> <input type="text" name="ffvillager" value = {{name}} readonly="readonly"><br>
+            <label>  New Image: </label> <input type="text" name="fimageVill" placeholder = "Enter a Link to an image!"><br>
+       <label> New Personality: </label> <input type="text" name="fpersonality" placeholder= {{personality}}><br>
+      <label> New Species: </label> <input type="text" name="fanimal" placeholder = {{animal}}><br> 
         <input type="submit" value= "Submit">
         </form>
         </div>

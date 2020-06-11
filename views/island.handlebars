@@ -33,8 +33,8 @@
         <option value={{id}}>{{name}}</option>
         {{/each}}
         </select>
-        Rating (1-5): <input type="text" name="frating"><br>
-         Favorite: <input type="text" name="ffavorite"><br>
+        Rating (1-5): <input type="text" name="frating"  placeholder="Enter an Rating"><br>
+         Favorite: <input type="text" name="ffavorite"  placeholder="Enter a Favorite 1 or 0"><br>
         <br>
         </div>
         <input type="submit" value= "Submit">
@@ -70,8 +70,8 @@
 
 <div class="hiddenFruit">
     <form id="addFruit" action="addFruit/" method="post">
-        Fruit Name: <input type="text" name="ffruit_name"><br>
-        Native: <input type="text" name="fnative"><br>
+        Fruit Name: <input type="text" name="ffruit_name" placeholder=" Enter a Fruit name!"><br>
+        Native: <input type="text" name="fnative"  placeholder="Enter a Native Value 1 or 0!"><br>
         <input type="submit" value= "Submit">
         </div>
         
@@ -80,8 +80,8 @@
 
         <div class="hiddenFlower">
         <form id="addflower" action="addFlower/" method="post">
-        Flower Name: <input type="text" name="fflower_name"><br>
-        Flower Color: <input type="text" name="fflower_color"><br>
+        Flower Name: <input type="text" name="fflower_name" placeholder="Enter a Flower Name"><br>
+        Flower Color: <input type="text" name="fflower_color" placeholder="Enter a corresponding Flower Color"><br>
         <input type="submit" value= "Submit">
         </div>
         
@@ -91,10 +91,3 @@
 
 
      </div>
-            <div class = "button_box">
-            <button id = "add_vill"> ADD </button>
-            <button id = "rmv_vill"> Remove </button>
-
-
-        <div class = "button_boxr">
-            <button id = "add_flower" onclick="addFlower()"> ADD </button> 
